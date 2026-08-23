@@ -29,6 +29,14 @@ Datenbank — detailliert genug, um sie direkt als Bauplan an eine Umsetzung
 | 14 | [MVP & Roadmap](14-mvp-roadmap.md) | Scope-Schnitte v0.1 → v3, Tech-Stack, Risiken, Baureihenfolge |
 | 15 | [Japan-Grundwissen](15-japan-wissen.md) | Kontextuelle Hinweise am Item, generiertes Trip-Briefing, Wissens-Bibliothek |
 | 16 | [Touren & Vorlagen](16-touren-und-vorlagen.md) | Fertige Routen als dritter Einstieg, buchbare Guided Tours als Item-Typ |
+| 17 | [Monetarisierung](17-monetarisierung.md) | Alle Erlöskanäle mit Richtwerten, Berührungspunkte im Produkt, Nicht-Affiliate-Quellen |
+
+## Prototyp
+
+Unter [`prototype/`](../prototype/index.html) liegt ein klickbarer Prototyp:
+Fragebogen → generierte Route → Trip-Dashboard mit den vier Aktionen, live
+mitlaufendem Budget und einem Schalter, der alle Monetarisierungspunkte im
+Plan markiert. Eine Datei, keine Abhängigkeiten — im Browser öffnen genügt.
 
 ## Die acht Kernideen in Kurzform
 

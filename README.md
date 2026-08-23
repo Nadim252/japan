@@ -17,6 +17,16 @@ Nutzerkonto, Content-Pipeline und MVP-Roadmap.
 
 Einstieg: **[docs/README.md](docs/README.md)**
 
+## Prototyp
+
+[`prototype/index.html`](prototype/index.html) — klickbarer Prototyp, eine
+einzelne Datei ohne Abhängigkeiten. Einfach im Browser öffnen.
+
+Enthalten: Fragebogen, generierte Route aus den angegebenen Interessen,
+Trip-Dashboard mit `Keep / Remove / Replace / Explore more`, live mitlaufendes
+Budget, Stadt entfernen mit Nächte-Umverteilung, Explore-Datenbank mit Filtern
+und ein Schalter, der alle Stellen markiert, an denen die Seite Geld verdient.
+
 ## Stand
 
 Konzept- und Spezifikationsphase. Noch kein Code.
