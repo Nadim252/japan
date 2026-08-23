@@ -74,14 +74,14 @@ oder ChatGPT-Ausgaben ohne Datenbank, Preise, Buchbarkeit und Editierbarkeit.
                  ┌────────────────────────┐
                  │       Homepage         │
                  └───────────┬────────────┘
-             ┌───────────────┴───────────────┐
-   ✨ Plan my trip for me            🧩 Build my own trip
-             │                               │
-        Onboarding (Q&A)              Leerer Trip
-             │                               │
-        Generator (AI)              + Add destination
-             │                               │
-             └───────────────┬───────────────┘
+      ┌──────────────────────┼──────────────────────┐
+ ✨ Plan my trip for me   🧩 Build my own trip   📋 Fertige Route
+      │                       │                       │
+ Onboarding (Q&A)        Leerer Trip           /tours → 4 Fragen
+      │                       │                       │
+ Generator (AI)          + Add destination      Vorlage kopieren
+      │                       │                       │
+      └──────────────────────┴──────────────────────┘
                              ▼
                      ┌──────────────┐
                      │ Trip-Dashboard│  ← ein einziges Objekt

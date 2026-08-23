@@ -14,7 +14,7 @@ gleichzeitig:
 ## Layout
 
 ```
-🔍 More in Akihabara                                    [Karte] [Liste] [✕]
+🔍 More in Akihabara                                    [Karte] [Liste] [Bilder] [✕]
 
 Suche: [ pokémon cards________ ]                       247 Orte
 
@@ -44,7 +44,7 @@ Sortierung  [Empfohlen für dich ▾] Beliebtheit · Distanz · Preis · Bewertu
 
 | Gruppe | Werte |
 |---|---|
-| **Kategorie** | attraction, food, café, bar, shopping, anime, manga, tcg, gaming, temple, shrine, museum, nature, park, onsen, viewpoint, photo_spot, experience, nightlife, market, event |
+| **Kategorie** | guided_tour, attraction, food, café, bar, shopping, anime, manga, tcg, gaming, temple, shrine, museum, nature, park, onsen, viewpoint, photo_spot, experience, nightlife, market, event |
 | **Interessen-Tags** | anime, one_piece, pokemon, ghibli, yugioh, magic, retro_gaming, arcade, ramen, sushi, izakaya, street_food, kaiseki, vegetarian, vegan, coffee, matcha, craft_beer, sake, whisky, tradition, history, architecture, art, design, fashion, vintage, nature, hiking, onsen, snow, sakura, momiji, photography, music, sports, sumo, baseball |
 | **Preis** | free, ¥ (< 1'000), ¥¥ (1'000–3'000), ¥¥¥ (3'000–10'000), ¥¥¥¥ (> 10'000) |
 | **Reservierung** | required, recommended, walk_in |
@@ -71,6 +71,33 @@ mit einem Anteil rotierender Hidden Gems.
 - „Zeichne einen Bereich“ → Filter auf frei gezeichnetes Polygon.
 - Klick auf Pin → Karten-Popover mit `+ Add to my trip`.
 - Layer: geplante Route, Bahnlinien (JR / Metro), Gehradius 10/20 Minuten vom Hotel.
+
+## Visuelle Entdeckung („zeig mir bildlich, wo was ist“)
+
+Explore hat drei gleichwertige Ansichten, umschaltbar oben rechts:
+
+| Ansicht | Wofür |
+|---|---|
+| **Karte** | „Was ist in meiner Nähe / in dieser Gegend?“ |
+| **Liste** | Vergleichen: Preis, Öffnungszeiten, Reservierung, Distanz |
+| **Bilder** | Stöbern ohne Ziel — der eigentliche Inspirationsmodus |
+
+Der **Bildermodus** ist ein dichtes, randloses Foto-Raster (Masonry, 3–5 Spalten),
+in dem der Ort erst beim Hover/Tap benannt wird. Kein Kartentext, keine Metadaten
+— nur das Bild. Wer nicht weiss, wonach er sucht, sucht visuell.
+
+- Wischen/Scrollen lädt endlos nach, gefiltert nach den Trip-Interessen.
+- Tap auf ein Bild → Vollbild mit Ortsname, Gegend, einer Zeile Beschreibung und
+  den zwei Aktionen `+ Add to my trip` und `Mehr davon`.
+- `Mehr davon` ist der wichtigste Knopf: Er setzt die Tags dieses Ortes als
+  Filter — visuelles Weitersuchen statt Filterformular.
+- Auf der Karte hat jeder Pin ab Zoomstufe 15 ein Foto-Thumbnail statt eines
+  Icons. Eine Karte aus Bildern liest sich schneller als eine Karte aus Punkten.
+
+**Bildqualität ist hier eine Produktanforderung, keine Ästhetik.** Ein POI ohne
+gutes Bild erscheint im Bildermodus nicht — lieber 400 Orte mit starken Fotos als
+1'200 mit Platzhaltern. Entsprechend ist `has_hero_image` ein Kriterium für
+Tier 1 in `13-content-pipeline.md`.
 
 ## POI-Detailseite (`/poi/:slug`)
 

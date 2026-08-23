@@ -27,11 +27,14 @@ Datenbank — detailliert genug, um sie direkt als Bauplan an eine Umsetzung
 | 12 | [Nutzerkonto](12-nutzerkonto.md) | Anonyme Drafts, Registrierungsmomente, Teilen, Export |
 | 13 | [Content-Pipeline](13-content-pipeline.md) | Datenquellen, Qualitätsstufen, Redaktion, Feedback-Loops |
 | 14 | [MVP & Roadmap](14-mvp-roadmap.md) | Scope-Schnitte v0.1 → v3, Tech-Stack, Risiken, Baureihenfolge |
+| 15 | [Japan-Grundwissen](15-japan-wissen.md) | Kontextuelle Hinweise am Item, generiertes Trip-Briefing, Wissens-Bibliothek |
+| 16 | [Touren & Vorlagen](16-touren-und-vorlagen.md) | Fertige Routen als dritter Einstieg, buchbare Guided Tours als Item-Typ |
 
 ## Die acht Kernideen in Kurzform
 
-1. **Zwei Einstiege, ein Produkt.** „Plan my trip for me“ und „Build my own trip“
-   führen in dasselbe Trip-Objekt und lassen sich jederzeit mischen.
+1. **Drei Einstiege, ein Produkt.** „Plan my trip for me“, „Build my own trip“
+   und „Fertige Route übernehmen“ führen in dasselbe Trip-Objekt und lassen sich
+   jederzeit mischen.
 2. **Destination Blocks statt Uhrzeiten.** Standard ist „Tokyo — 5 Nächte,
    Area 1 Shibuya + Harajuku“, nicht „10:15 Tempel“. Zeitpläne nur auf Wunsch.
 3. **Vier Aktionen überall.** `Keep` · `Remove` · `Replace` · `Explore more` —
@@ -46,3 +49,5 @@ Datenbank — detailliert genug, um sie direkt als Bauplan an eine Umsetzung
    Reservierungspflicht-Check ist der eigentliche Japan-Mehrwert.
 8. **Der Nutzer besitzt den Plan.** Gepinnte Elemente überleben jede
    Regenerierung, jeder AI-Vorschlag ist ein annehmbarer Diff.
+9. **Wissen kommt kontextuell, nicht als Ratgeber.** Der Tattoo-Hinweis erscheint
+   am Onsen, die Bargeld-Warnung am Laden, der Rest im generierten Trip-Briefing.

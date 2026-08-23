@@ -19,6 +19,8 @@ technisch ist.
         │  60 seconds, AI-generated │   │  Start empty, add cities  │
         └──────────────────────────┘   └──────────────────────────┘
 
+             Oder: fertige Route ansehen und umbauen →  /tours
+
                    No account needed to start
 ```
 
@@ -40,6 +42,15 @@ technisch ist.
 
 Darunter, klein und ehrlich: *„Wir buchen nichts automatisch. Du entscheidest,
 was du wo buchst.“*
+
+### Der dritte Einstieg
+
+Unter den beiden Buttons steht dezent ein dritter Weg: **eine fertige,
+redaktionell kuratierte Route übernehmen und umbauen** (`/tours`, siehe
+`16-touren-und-vorlagen.md`). Er bekommt bewusst keinen eigenen grossen Button —
+zwei Optionen entscheidet man schnell, drei erzeugen Grübeln. Für Nutzer, die
+weder ein Formular ausfüllen noch bei null anfangen wollen, ist er trotzdem der
+angenehmste Start, und über SEO ist er ohnehin der häufigste Einstieg von aussen.
 
 ## Section 3 — Live-Beispiel (das wichtigste Verkaufselement)
 

@@ -28,6 +28,8 @@ Trip
   "id": "trp_8f2k...",
   "version": 42,                        // steigt bei jeder Änderung (Optimistic Locking)
   "owner_id": "usr_...",                // null = anonymer Draft
+  "is_template": false,                 // true = redaktionelle Route unter /tours
+  "template_source_id": null,           // aus welcher Vorlage kopiert
   "title": "Anime, Ramen & Berge",
   "status": "draft | active | archived",
   "visibility": "private | link | public",
@@ -64,6 +66,7 @@ Trip
     "anime_titles": ["one_piece", "your_name"],
     "tcg_games": ["pokemon"],
     "dietary": [],
+    "user_flags": ["has_tattoo"],       // steuert Hinweise + POI-Filter, siehe 15-japan-wissen.md
     "pace": "relaxed",
     "classics_level": "some",
     "local_level": "mixed",
@@ -175,7 +178,9 @@ Trip
 ```jsonc
 {
   "id": "itm_...",
+  "item_type": "poi | guided_tour | custom | note",
   "poi_id": "poi_meiji_jingu",           // null bei custom_poi
+  "tour_id": null,                       // bei item_type = guided_tour (siehe 16-touren-und-vorlagen.md)
   "custom": null,                        // { name, category, address, url } bei eigenen Einträgen
   "order": 0,
   "source": "ai | user | template",
