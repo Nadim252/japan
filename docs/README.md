@@ -30,6 +30,7 @@ Datenbank — detailliert genug, um sie direkt als Bauplan an eine Umsetzung
 | 15 | [Japan-Grundwissen](15-japan-wissen.md) | Kontextuelle Hinweise am Item, generiertes Trip-Briefing, Wissens-Bibliothek |
 | 16 | [Touren & Vorlagen](16-touren-und-vorlagen.md) | Fertige Routen als dritter Einstieg, buchbare Guided Tours als Item-Typ |
 | 17 | [Monetarisierung](17-monetarisierung.md) | Alle Erlöskanäle mit Richtwerten, Berührungspunkte im Produkt, Nicht-Affiliate-Quellen |
+| 18 | [Bildquellen](18-bildquellen.md) | Woher echte Fotos legal kommen, Quelle je Kategorie, Rechtslage, Vorgehen für Phase 1 |
 
 ## Prototyp
 
