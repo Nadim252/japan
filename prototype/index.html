@@ -161,13 +161,15 @@ input[type=range]{width:100%;accent-color:var(--accent)}
 
 /* Bildkachel */
 .pthumb{position:relative;display:block;aspect-ratio:4/3;border-radius:14px;overflow:hidden;background:var(--surface-2)}
-.pthumb canvas{position:absolute;inset:0;width:100%;height:100%;transition:transform .3s ease,filter .2s}
+.pthumb canvas,.pthumb img{position:absolute;inset:0;width:100%;height:100%;transition:transform .3s ease,filter .2s}
+.pthumb img{object-fit:cover}
+.cthumb canvas,.cthumb img{width:100%;height:100%;object-fit:cover}
 
 /* Stadtkarten */
 .ovgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(238px,1fr));gap:16px}
 .citycard{display:block;width:100%;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:9px;box-shadow:var(--shadow);transition:transform .16s,box-shadow .16s,border-color .16s}
 .citycard:hover{transform:translateY(-3px);box-shadow:var(--shadow-md);border-color:var(--line-2)}
-.citycard:hover .pthumb canvas{transform:scale(1.05)}
+.citycard:hover .pthumb canvas,.citycard:hover .pthumb img{transform:scale(1.05)}
 .ccn{position:absolute;top:9px;right:9px;background:rgba(255,255,255,.94);color:#171214;border-radius:999px;padding:4px 11px;font-family:var(--mono);font-size:11px;font-weight:600;backdrop-filter:blur(6px)}
 .cc{display:block;padding:12px 8px 6px}
 .cc-t{font-family:var(--display);font-weight:900;font-size:21px;letter-spacing:-.025em;display:flex;align-items:baseline;gap:8px}
@@ -225,9 +227,9 @@ input[type=range]{width:100%;accent-color:var(--accent)}
 .pgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(206px,1fr));gap:16px}
 .pcard{position:relative;display:block;width:100%;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:9px;box-shadow:var(--shadow);transition:transform .16s,box-shadow .16s,border-color .16s}
 .pcard:hover{transform:translateY(-3px);box-shadow:var(--shadow-md)}
-.pcard:hover .pthumb canvas{transform:scale(1.05)}
+.pcard:hover .pthumb canvas,.pcard:hover .pthumb img{transform:scale(1.05)}
 .pgrid[data-mode="all"] .pcard.on{border-color:var(--accent);box-shadow:inset 0 0 0 1px var(--accent),var(--shadow)}
-.pcard.off .pthumb canvas{filter:saturate(.55) brightness(1.06)}
+.pcard.off .pthumb canvas,.pcard.off .pthumb img{filter:saturate(.55) brightness(1.06)}
 .psel{position:absolute;top:9px;right:9px;width:28px;height:28px;border-radius:50%;background:rgba(255,255,255,.92);backdrop-filter:blur(6px);border:1px solid rgba(23,18,20,.12);display:grid;place-items:center;color:var(--ink-2);font-size:14px;font-weight:700;z-index:3;transition:all .14s}
 .pcard.on .psel{background:var(--accent);border-color:var(--accent);color:#fff}
 .ptag{position:absolute;top:9px;left:9px;z-index:3;background:var(--gold);color:#fff;border-radius:999px;padding:4px 10px;font-size:10.5px;font-weight:800}
@@ -515,7 +517,34 @@ var CONN={ 'tokyo-hakone':{m:'Odakyu Romancecar',dur:85,chf:14,pass:false},
 var FOOD_RATE={sparsam:3100,normal:5800,foodie:10400};
 
 
-/* ============ BILDMOTIVE (Canvas-Platzhalter für spätere Fotos) ============ */
+/* ============ FOTOS ============================================================
+   Echte Fotos werden hier eingetragen — Schlüssel ist die Orts-ID (oder city:<id>).
+   src darf eine URL sein (eigene Seite) oder ein eingebettetes data:-Bild (Artifact,
+   weil dort externe Bild-Hosts gesperrt sind).
+   Wo kein Eintrag steht, zeichnet die Seite ersatzweise ein Motiv.
+   Beispiel:
+     'meiji': {src:'/img/meiji.jpg', by:'Vorname Nachname', lic:'CC BY-SA 4.0',
+               url:'https://quelle...'},
+   Auf einer eigenen Seite genuegt ein Script-Tag VOR dieser Datei:
+     <script>window.MEGURI_PHOTOS={ meiji:{src:'/img/meiji.jpg', by:'...', lic:'...'} }<\/script>
+============================================================================== */
+var PHOTOS=(typeof window!=='undefined'&&window.MEGURI_PHOTOS)||{};
+
+function hasPhoto(k){return !!(PHOTOS[k]&&PHOTOS[k].src);}
+function thumb(key,art,alt,cls){
+  var extra=cls?' '+cls:'';
+  if(hasPhoto(key))
+    return '<img class="pimg'+extra+'" src="'+esc(PHOTOS[key].src)+'" alt="'+esc(alt||'')+'" loading="lazy" decoding="async">';
+  return '<canvas class="pcv'+extra+'" data-art="'+art+'" role="img" aria-label="'+esc(alt||'')+'"></canvas>';
+}
+function credits(){
+  var out=[],seen={};
+  for(var k in PHOTOS){var c=PHOTOS[k];if(!c||!c.src||!c.by||seen[c.by+c.lic])continue;
+    seen[c.by+c.lic]=1;out.push(esc(c.by)+(c.lic?' ('+esc(c.lic)+')':''));}
+  return out.length?'<br>Bilder: '+out.join(' · '):'';
+}
+
+/* ============ ERSATZMOTIVE (bis Fotos vorliegen) ============ */
 var PAL={shrine:['#5E1512','#E4503B'],temple:['#402A15','#C9915A'],nature:['#0E2B24','#3FB98A'],
  park:['#12271A','#57A85B'],food:['#3A1C0E','#E2913B'],cafe:['#2C1D12','#C08B5C'],
  bar:['#2E0F1A','#D24A6B'],market:['#33210F','#D9A441'],anime:['#241539','#A46BE0'],
@@ -728,9 +757,11 @@ function renderApp(){
   $('#bfig').innerHTML='<span><b>'+chf(g.total)+'</b></span><span>'+(g.rest<0?'über':'Rest')+' <b>'+chf(Math.abs(g.rest))+'</b></span>';
   $('#cities').innerHTML='<button class="ctab" data-city="__ov" aria-selected="'+(S.view==='overview')+'">Übersicht</button>'+
     t.dests.map(function(d){return '<button class="ctab" data-city="'+d.city+'" aria-selected="'+(S.view===d.city)+'">'+
-      '<span class="cthumb"><canvas data-art="city|'+d.city+'" style="width:100%;height:100%"></canvas></span>'+
+      '<span class="cthumb">'+thumb('city:'+d.city,'city|'+d.city,'')+'</span>'+
       esc(CITIES[d.city].n)+' <small>'+d.nights+'N</small></button>';}).join('')+
     '<button class="ctab ctab-add" data-act="add-dest">+ Stadt</button>';
+  var ft=document.querySelector('.foot');
+  if(ft&&!ft.dataset.done){ft.innerHTML+=credits();ft.dataset.done='1';}
   if(S.view==='overview')renderOverview();else renderCity(S.view);
   requestAnimationFrame(paintAll);
 }
@@ -742,7 +773,7 @@ function renderOverview(){
     var C=CITIES[d.city],n=0;d.areas.forEach(function(a){n+=a.items.length;});
     var ho=hotelOf(d);
     h+='<button class="citycard" data-city="'+d.city+'">'+
-      '<span class="pthumb"><canvas data-art="city|'+d.city+'"></canvas>'+
+      '<span class="pthumb">'+thumb('city:'+d.city,'city|'+d.city,C.n)+
       '<span class="ccn">'+d.nights+' '+(d.nights===1?'Nacht':'Nächte')+'</span></span>'+
       '<span class="cc"><span class="cc-t">'+esc(C.n)+' <small>'+C.jp+'</small></span>'+
       '<span class="ccm">'+n+' Orte'+(S.brief.hotels&&ho?' · '+chf(ho.chf)+'/Nacht':'')+'</span></span></button>';
@@ -770,7 +801,7 @@ function renderCity(cid){
   if(!d){S.view='overview';return renderOverview();}
   if(!S.area[cid])S.area[cid]='__all';
   var sel=S.area[cid],all=cityAreas(cid),h='';
-  h+='<div class="chero"><div class="chero-img"><div class="pthumb"><canvas data-art="city|'+cid+'"></canvas></div></div>'+
+  h+='<div class="chero"><div class="chero-img"><div class="pthumb">'+thumb('city:'+cid,'city|'+cid,C.n)+'</div></div>'+
     '<div class="chero-body"><div style="flex:1;min-width:150px">'+
     '<div class="chero-t">'+esc(C.n)+' <small>'+C.jp+'</small></div>'+
     '<div class="cm">'+d.areas.reduce(function(s,a){return s+a.items.length;},0)+' Orte geplant</div></div>'+
@@ -815,7 +846,7 @@ function renderCity(cid){
     var p=o.p,on=!!o.it,isM=(p.res==='req'||p.cat==='tour');
     h+='<div class="pcard '+(on?'on':'off')+(o.it&&o.it.locked?' pinned':'')+(isM?' has-mk':'')+'" role="button" tabindex="0" '+
       'data-act="toggle" data-p="'+p.id+'" data-a="'+o.a.id+'" data-c="'+cid+'" aria-pressed="'+on+'" aria-label="'+esc(p.n)+'">'+
-      '<div class="pthumb"><canvas data-art="'+p.id+'|'+p.cat+'"></canvas>'+
+      '<div class="pthumb">'+thumb(p.id,p.id+'|'+p.cat,p.n)+
       tag(p)+'<span class="psel">'+(on?'✓':'+')+'</span>'+
       (on?'<span class="pacts">'+
         '<button class="pmini" data-act="pin" data-p="'+p.id+'" data-a="'+o.a.id+'" data-c="'+cid+'" aria-pressed="'+(o.it.locked)+'" aria-label="Fixieren">📌</button>'+

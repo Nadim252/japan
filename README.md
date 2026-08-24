@@ -31,8 +31,26 @@ markiert, an denen die Seite Geld verdient.
 Gestaltung: weisse Oberfläche, rote Akzente, Karten mit Bild oben und Text
 darunter. Dunkles Thema als Umkehrung vorhanden.
 
-Die Bilder sind auf Canvas erzeugte Motive je Kategorie — Platzhalter für die
-späteren Fotos.
+### Fotos einsetzen
+
+Der Prototyp zeigt echte Fotos, sobald welche hinterlegt sind, und zeichnet nur
+ersatzweise ein Motiv, wo noch keins existiert. Beides mischt sich beliebig.
+
+Ein Script-Tag vor `index.html` genügt:
+
+```html
+<script>
+window.MEGURI_PHOTOS = {
+  'meiji':      { src:'/img/meiji.jpg',  by:'Fotograf', lic:'CC BY-SA 4.0', url:'https://…' },
+  'city:tokyo': { src:'/img/tokyo.jpg',  by:'Fotograf', lic:'CC BY-SA 4.0', url:'https://…' }
+};
+</script>
+```
+
+Schlüssel ist die Orts-ID aus dem Datensatz, für Städte `city:<id>`. `src` darf
+eine URL sein (eigene Seite) oder ein eingebettetes `data:`-Bild. Die Angaben
+`by` und `lic` erscheinen automatisch als Bildnachweis in der Fusszeile — bei
+CC-lizenzierten Fotos ist das Pflicht.
 
 ## Stand
 
