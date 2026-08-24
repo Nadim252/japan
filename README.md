@@ -28,6 +28,9 @@ Enthalten: Fragebogen, generierte Route aus den angegebenen Interessen,
 Stadt entfernen mit Nächte-Umverteilung und ein Schalter, der alle Stellen
 markiert, an denen die Seite Geld verdient.
 
+Gestaltung: weisse Oberfläche, rote Akzente, Karten mit Bild oben und Text
+darunter. Dunkles Thema als Umkehrung vorhanden.
+
 Die Bilder sind auf Canvas erzeugte Motive je Kategorie — Platzhalter für die
 späteren Fotos.
 
