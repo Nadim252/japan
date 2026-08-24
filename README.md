@@ -23,9 +23,13 @@ Einstieg: **[docs/README.md](docs/README.md)**
 einzelne Datei ohne Abhängigkeiten. Einfach im Browser öffnen.
 
 Enthalten: Fragebogen, generierte Route aus den angegebenen Interessen,
-Trip-Dashboard mit `Keep / Remove / Replace / Explore more`, live mitlaufendes
-Budget, Stadt entfernen mit Nächte-Umverteilung, Explore-Datenbank mit Filtern
-und ein Schalter, der alle Stellen markiert, an denen die Seite Geld verdient.
+Übersicht der Städte als Bildkacheln, Stadtansicht mit Bildraster zum Antippen
+(auswählen, abwählen, fixieren, ersetzen), live mitlaufendes Budget,
+Stadt entfernen mit Nächte-Umverteilung und ein Schalter, der alle Stellen
+markiert, an denen die Seite Geld verdient.
+
+Die Bilder sind auf Canvas erzeugte Motive je Kategorie — Platzhalter für die
+späteren Fotos.
 
 ## Stand
 

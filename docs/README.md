@@ -34,9 +34,10 @@ Datenbank — detailliert genug, um sie direkt als Bauplan an eine Umsetzung
 ## Prototyp
 
 Unter [`prototype/`](../prototype/index.html) liegt ein klickbarer Prototyp:
-Fragebogen → generierte Route → Trip-Dashboard mit den vier Aktionen, live
-mitlaufendem Budget und einem Schalter, der alle Monetarisierungspunkte im
-Plan markiert. Eine Datei, keine Abhängigkeiten — im Browser öffnen genügt.
+Fragebogen → generierte Route → Übersicht → Stadtansicht mit Bildraster.
+Orte werden durch Antippen ausgewählt, das Budget läuft live mit, und ein
+Schalter markiert alle Monetarisierungspunkte. Eine Datei, keine
+Abhängigkeiten — im Browser öffnen genügt.
 
 ## Die acht Kernideen in Kurzform
 
