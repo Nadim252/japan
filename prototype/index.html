@@ -303,6 +303,17 @@ input[type=range]{width:100%;accent-color:var(--accent)}
 .vswitch button[aria-pressed="true"]{background:var(--surface);color:var(--ink);box-shadow:var(--shadow)}
 
 /* ORTSKARTEN: Bild oben, Text auf Weiss darunter */
+.grouphead{grid-column:1/-1;display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;
+  margin:14px 0 -2px;padding-bottom:9px;border-bottom:1px solid var(--line)}
+.grouphead:first-child{margin-top:0}
+.gh-k{font-family:var(--jp);font-size:14px;color:var(--accent);font-weight:700}
+.gh-t{font-family:var(--display);font-size:17px;font-weight:700;letter-spacing:-.01em}
+.gh-n{font-size:12px;color:var(--ink-3)}
+.gh-h{font-size:12.5px;color:var(--ink-3);flex:1;min-width:200px}
+.gridnote{display:flex;align-items:baseline;gap:16px;flex-wrap:wrap;margin:-4px 0 16px;font-size:13px;color:var(--ink-3)}
+.gn-on b{font-family:var(--mono);font-size:15px;color:var(--accent);font-weight:600}
+.gn-off b{font-family:var(--mono);font-size:15px;color:var(--ink);font-weight:600}
+.gn-off{color:var(--ink-2)}
 .pgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(206px,1fr));gap:16px}
 .pcard{position:relative;display:block;width:100%;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:9px;box-shadow:var(--shadow);transition:transform .16s,box-shadow .16s,border-color .16s}
 .pcard:hover{transform:translateY(-3px);box-shadow:var(--shadow-md)}
@@ -476,6 +487,13 @@ body.money .has-mk{outline:1.5px dashed var(--money);outline-offset:3px}
 .nightctl.small span{font-size:12px;min-width:62px}
 
 /* ---------- Unterkunft ---------- */
+.stayline{display:flex;align-items:center;gap:13px;padding:13px 16px;margin-bottom:22px;position:relative;
+  border:1px solid var(--line);border-radius:var(--r);background:var(--surface);box-shadow:var(--shadow);flex-wrap:wrap}
+.stayline-k{width:32px;height:32px;border-radius:7px;display:grid;place-items:center;flex:none;
+  font-family:var(--jp);font-size:14px;font-weight:700;border:2px solid var(--accent);color:var(--accent);transform:rotate(-7deg)}
+.stayline-b{flex:1;min-width:170px;display:flex;flex-direction:column;gap:2px}
+.stayline-b b{font-weight:700;font-size:14.5px}
+.stayline-b span{font-size:12.5px;color:var(--ink-3);font-family:var(--mono)}
 .staysec{margin-bottom:30px}
 .stayhead{display:flex;align-items:center;gap:13px;margin-bottom:13px}
 .staythumb{width:64px;height:44px;border-radius:9px;overflow:hidden;flex:none;position:relative;display:block}
@@ -1057,7 +1075,7 @@ var FLIGHTS=[
 
 /* ============ STATE ============ */
 var S={brief:{days:14,budget:3000,pace:'normal',interests:{},classics:'some',hotels:true,flights:true,persons:2},
-       trip:null,view:'overview',area:{},mode:'plan',qi:0,step:'cities'};
+       trip:null,view:'overview',area:{},mode:'all',qi:0,step:'cities'};
 
 function poi(id){for(var i=0;i<AREAS.length;i++)for(var j=0;j<AREAS[i].pois.length;j++)if(AREAS[i].pois[j].id===id)return AREAS[i].pois[j];return null;}
 function area(id){for(var i=0;i<AREAS.length;i++)if(AREAS[i].id===id)return AREAS[i];return null;}
@@ -1361,39 +1379,57 @@ function renderCity(cid){
     '<button class="btn btn-ghost btn-sm" data-act="dest-rm" data-c="'+cid+'">Stadt entfernen</button>'+
     '</div></div>';
   if(S.brief.hotels){
-    h+='<div class="sec"><div class="sechead"><h2>Unterkunft</h2><span class="cnt">'+d.nights+' Nächte</span></div><div class="hotels">';
-    C.hotels.forEach(function(x){
-      h+='<button class="hcard'+(x.id===d.hotel?' has-mk':'')+'" data-act="hotel" data-c="'+cid+'" data-h="'+x.id+'" aria-pressed="'+(x.id===d.hotel)+'">'+
-        (x.id===d.hotel?mk(2,'Hotel'):'')+'<span class="hcheck">泊</span>'+
-        '<div class="hlab">'+esc(x.lab)+'</div><div class="hname">'+esc(x.n)+'</div>'+
-        '<div class="hprice">'+chf(x.chf)+'<span style="font-size:11px;font-family:var(--body);color:var(--ink-3)"> /Nacht</span></div>'+
-        '<div class="hmeta">'+esc(x.s)+'</div></button>';
-    });
-    h+='</div></div>';
+    var ho=hotelOf(d);
+    h+='<div class="stayline has-mk">'+mk(2,'Hotel')+
+      '<span class="stayline-k">泊</span>'+
+      '<span class="stayline-b"><b>'+esc(ho.n)+'</b>'+
+      '<span>'+chf(ho.chf)+'/Nacht · '+d.nights+' '+(d.nights===1?'Nacht':'Nächte')+
+      ' · gesamt '+chf(ho.chf*d.nights)+'</span></span>'+
+      '<button class="act" data-step="stay">Unterkunft ändern</button></div>';
   }
   var COL=['#E4503B','#3D9BD6','#A46BE0','#3FB98A','#D9A441','#C05CE0','#57A85B'];
   h+='<div class="sec"><div class="sechead"><h2>Orte</h2><span class="spacer"></span>'+
-     '<span class="vswitch"><button data-act="mode" data-m="plan" aria-pressed="'+(S.mode==='plan')+'">Mein Plan</button>'+
-     '<button data-act="mode" data-m="all" aria-pressed="'+(S.mode==='all')+'">Alle Orte</button></span></div>';
+     '<span class="vswitch"><button data-act="mode" data-m="all" aria-pressed="'+(S.mode==='all')+'">Alle zeigen</button>'+
+     '<button data-act="mode" data-m="plan" aria-pressed="'+(S.mode==='plan')+'">Nur gestempelte</button></span></div>';
   h+='<div class="areachips"><button class="achip" data-act="area" data-c="'+cid+'" data-a="__all" aria-selected="'+(sel==='__all')+'">Alle Gegenden</button>'+
     all.map(function(a,i){var n=planCount(d,a.id);
       return '<button class="achip" data-act="area" data-c="'+cid+'" data-a="'+a.id+'" aria-selected="'+(sel===a.id)+'">'+
         '<b aria-hidden="true">'+jnum(i)+'</b>'+
-        esc(a.t)+' <small>'+n+'</small></button>';}).join('')+'</div>';
+        esc(a.t)+' <small>'+n+'/'+a.pois.length+'</small></button>';}).join('')+'</div>';
   var scope=sel==='__all'?all:all.filter(function(a){return a.id===sel;});
-  var cards=[];
-  scope.forEach(function(a){
-    a.pois.forEach(function(p){
-      var it=inPlan(d,p.id);
-      if(S.mode==='plan'&&!it)return;
-      cards.push({p:p,a:a,it:it});
-    });
+  var cards=[],onCount=0,offCount=0;
+  scope.forEach(function(a,ai2){
+    var e=areaEntry(d,a.id,false),seen={},grp=[];
+    if(e)e.items.forEach(function(it){
+      var pp=poi(it.id);if(!pp)return;seen[it.id]=1;onCount++;
+      grp.push({p:pp,a:a,it:it});});
+    if(S.mode!=='plan')a.pois.forEach(function(pp){
+      if(seen[pp.id])return;offCount++;
+      grp.push({p:pp,a:a,it:null});});
+    if(!grp.length)return;
+    if(sel==='__all')cards.push({head:a,idx:ai2,n:grp.filter(function(x){return x.it;}).length,tot:a.pois.length});
+    cards=cards.concat(grp);
   });
+  h+='<div class="gridnote">'+
+     '<span class="gn-on"><b>'+onCount+'</b> gestempelt</span>'+
+     (S.mode==='plan'
+       ? '<span class="gn-off">Weitere ausgeblendet — <button class="linkish" data-act="mode" data-m="all">alle zeigen</button></span>'
+       : (offCount?'<span class="gn-off"><b>'+offCount+'</b> weitere hier — antippen zum Hinzufügen</span>'
+                  :'<span class="gn-off">Alles aus dieser Gegend ist im Plan.</span>'))+
+     '</div>';
   h+='<div class="pgrid" data-mode="'+S.mode+'">';
   if(!cards.length){
-    h+='<div class="emptyg">'+(S.mode==='plan'?'Hier ist noch nichts geplant. Wechsle auf <b>Alle Orte</b> und tippe an, was dich interessiert.':'Keine Orte gefunden.')+'</div>';
+    h+='<div class="emptyg">'+(S.mode==='plan'
+      ?'Hier ist noch nichts gestempelt. <button class="linkish" data-act="mode" data-m="all">Alle Orte zeigen</button>'
+      :'Für diese Gegend haben wir noch keine Orte erfasst.')+'</div>';
   }
   cards.forEach(function(o){
+    if(o.head){
+      h+='<div class="grouphead"><span class="gh-k">'+jnum(o.idx)+'</span>'+
+         '<span class="gh-t">'+esc(o.head.t)+'</span>'+
+         '<span class="gh-n num">'+o.n+'/'+o.tot+'</span>'+
+         (o.head.hint?'<span class="gh-h">'+esc(o.head.hint)+'</span>':'')+'</div>';
+      return;}
     var p=o.p,on=!!o.it,isM=(p.res==='req'||p.cat==='tour');
     h+='<div class="pcard '+(on?'on':'off')+(o.it&&o.it.locked?' pinned':'')+(isM?' has-mk':'')+'" role="button" tabindex="0" '+
       'data-act="toggle" data-p="'+p.id+'" data-a="'+o.a.id+'" data-c="'+cid+'" aria-pressed="'+on+'" aria-label="'+esc(p.n)+'">'+
@@ -1406,7 +1442,7 @@ function renderCity(cid){
       '<div class="pc"><div class="pc-n">'+esc(p.n)+'</div><div class="pc-jp">'+p.jp+'</div>'+
       '<div class="pc-m">'+(p.y?'<span class="num">'+yen(p.y)+'</span>':'<span>gratis</span>')+
       '<span class="num">'+p.dur+ 'Min</span>'+(p.cash?'<span>· bar</span>':'')+
-      (sel==='__all'?'<span style="opacity:.7">· '+esc(o.a.t)+'</span>':'')+'</div>'+
+'</div>'+
       '<div class="pc-why">'+esc(p.why||'')+'</div></div></div>';
   });
   h+='</div></div>';
