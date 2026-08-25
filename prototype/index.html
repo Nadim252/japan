@@ -314,6 +314,7 @@ input[type=range]{width:100%;accent-color:var(--accent)}
 .gn-on b{font-family:var(--mono);font-size:15px;color:var(--accent);font-weight:600}
 .gn-off b{font-family:var(--mono);font-size:15px;color:var(--ink);font-weight:600}
 .gn-off{color:var(--ink-2)}
+.gn-hint{color:var(--ink-3);font-size:12px}
 .pgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(206px,1fr));gap:16px}
 .pcard{position:relative;display:block;width:100%;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:9px;box-shadow:var(--shadow);transition:transform .16s,box-shadow .16s,border-color .16s}
 .pcard:hover{transform:translateY(-3px);box-shadow:var(--shadow-md)}
@@ -346,6 +347,15 @@ input[type=range]{width:100%;accent-color:var(--accent)}
 .pc-jp{font-family:var(--display);font-size:11px;color:var(--ink-3);font-weight:500;margin-top:1px}
 .pc-m{display:flex;gap:8px;align-items:center;margin-top:7px;font-size:11.5px;color:var(--ink-2);flex-wrap:wrap}
 .pc-m .num{font-size:11.5px;font-weight:600;color:var(--ink)}
+.dist{display:inline-flex;align-items:center;gap:5px;margin-top:7px;padding:3px 9px 3px 4px;
+  border-radius:999px;background:var(--accent-soft);color:var(--accent-2);
+  font-size:11.5px;font-weight:700;white-space:nowrap}
+.dist.ride{background:var(--surface-2);color:var(--ink-2)}
+.dico{font-size:11px;line-height:1}
+.gh-d .dist{margin-top:0}
+.achip-d{font-family:var(--mono);font-size:10.5px;color:var(--ink-3);
+  border-left:1px solid var(--line-2);padding-left:7px;margin-left:1px}
+.achip[aria-selected="true"] .achip-d{color:rgba(255,255,255,.65);border-color:rgba(255,255,255,.3)}
 .pc-why{font-size:11.5px;color:var(--ink-3);margin-top:6px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;line-height:1.4;min-height:2.8em}
 .emptyg{grid-column:1/-1;text-align:center;padding:44px 22px;color:var(--ink-3);font-size:14px;border:1px dashed var(--line-2);border-radius:var(--r);background:var(--surface)}
 
@@ -399,7 +409,16 @@ body.money .has-mk{outline:1.5px dashed var(--money);outline-offset:3px}
   .pgrid{grid-template-columns:repeat(2,1fr);gap:11px}
   .ovgrid{grid-template-columns:repeat(2,1fr);gap:11px}
   .pcard,.citycard{padding:7px;border-radius:14px}
-  .pc{padding:10px 5px 3px}.pc-n{font-size:13px}.pc-why{display:none}
+  .pc{padding:10px 5px 3px}.pc-n{font-size:13px}.dist{display:inline-flex;align-items:center;gap:5px;margin-top:7px;padding:3px 9px 3px 4px;
+  border-radius:999px;background:var(--accent-soft);color:var(--accent-2);
+  font-size:11.5px;font-weight:700;white-space:nowrap}
+.dist.ride{background:var(--surface-2);color:var(--ink-2)}
+.dico{font-size:11px;line-height:1}
+.gh-d .dist{margin-top:0}
+.achip-d{font-family:var(--mono);font-size:10.5px;color:var(--ink-3);
+  border-left:1px solid var(--line-2);padding-left:7px;margin-left:1px}
+.achip[aria-selected="true"] .achip-d{color:rgba(255,255,255,.65);border-color:rgba(255,255,255,.3)}
+.pc-why{display:none}
   .cc{padding:10px 5px 4px}.cc-t{font-size:17px}
   .wrap{padding:20px 15px 76px}
   .chero{gap:13px;padding:10px}
@@ -1073,6 +1092,69 @@ var FLIGHTS=[
  {id:'f_value',lab:'Bestes Verhältnis',route:'ZRH → NRT · zurück ab KIX',out:'12. Apr · 11:05 → 07:40+1',
   ret:'26. Apr · 11:40 → 19:15',dur:'13 h 10',stops:'1 Stopp · Helsinki',chf:748,co2:'1,7 t'}];
 
+
+/* ============ ENTFERNUNGEN ============
+   Naeherungskoordinaten der Viertel-Mittelpunkte. Reicht, um "zu Fuss" von
+   "mit der Bahn" zu unterscheiden — keine Routenberechnung.              */
+var AGEO={
+ shibuya:[35.663,139.700], akiba:[35.699,139.771], asakusa:[35.712,139.797],
+ shinjuku:[35.690,139.700], toyosu:[35.645,139.795], nakano:[35.706,139.665],
+ mitaka:[35.696,139.570], hakone_a:[35.232,139.026],
+ higashiyama:[34.998,135.782], arashiyama:[35.010,135.667],
+ kyotocity:[35.005,135.768], fushimi:[34.967,135.772],
+ namba:[34.665,135.501], denden:[34.660,135.505], osakacity:[34.702,135.496],
+ nara_a:[34.685,135.843], hiro_a:[34.395,132.454], miyajima:[34.296,132.320],
+ kana_a:[36.562,136.657], nikko_a:[36.758,139.599], taka_a:[36.142,137.252],
+ naga_a:[36.649,138.188], sapp_a:[43.062,141.354], fuku_a:[33.590,130.401],
+ nago_a:[35.170,136.885], oki_a:[26.213,127.679]};
+
+/* In welchem Viertel liegt welche Unterkunft */
+var HAREA={h1:'shinjuku',h2:'shinjuku',h3:'shinjuku',h4:'asakusa',
+ h5:'hakone_a',h6:'hakone_a',h7:'hakone_a',
+ h8:'kyotocity',h9:'kyotocity',h10:'higashiyama',h11:'higashiyama',
+ h12:'namba',h13:'namba',h14:'namba',
+ n1:'nara_a',n2:'nara_a',n3:'nara_a', hi1:'hiro_a',hi2:'hiro_a',hi3:'hiro_a',
+ ka1:'kana_a',ka2:'kana_a',ka3:'kana_a', ni1:'nikko_a',ni2:'nikko_a',ni3:'nikko_a',
+ ta1:'taka_a',ta2:'taka_a',ta3:'taka_a', na1:'naga_a',na2:'naga_a',na3:'naga_a',
+ sa1:'sapp_a',sa2:'sapp_a',sa3:'sapp_a', fu1:'fuku_a',fu2:'fuku_a',fu3:'fuku_a',
+ ng1:'nago_a',ng2:'nago_a',ng3:'nago_a', ok1:'oki_a',ok2:'oki_a',ok3:'oki_a'};
+
+/* Was faehrt in welcher Stadt */
+var TRANSIT={tokyo:'Metro',osaka:'Metro',kyoto:'Metro',nagoya:'Metro',
+ sapporo:'Metro',fukuoka:'Metro',hiroshima:'Tram',nara:'Bus',hakone:'Bus',
+ nikko:'Bus',takayama:'Bus',nagano:'Bus',okinawa:'Bus'};
+
+function kmBetween(a,b){
+  var R=6371,dLat=(b[0]-a[0])*Math.PI/180,dLon=(b[1]-a[1])*Math.PI/180;
+  var la1=a[0]*Math.PI/180,la2=b[0]*Math.PI/180;
+  var x=Math.sin(dLat/2)*Math.sin(dLat/2)+Math.sin(dLon/2)*Math.sin(dLon/2)*Math.cos(la1)*Math.cos(la2);
+  return R*2*Math.atan2(Math.sqrt(x),Math.sqrt(1-x));
+}
+function hotelArea(d){
+  var ho=hotelOf(d);
+  if(ho&&HAREA[ho.id])return HAREA[ho.id];
+  return (d.areas[0]&&d.areas[0].id)||(cityAreas(d.city)[0]||{}).id;
+}
+/* Entfernung von der gewaehlten Unterkunft zu einem Viertel */
+function fromHotel(d,areaId){
+  if(!S.brief.hotels)return null;
+  var ha=hotelArea(d);if(!ha)return null;
+  if(ha===areaId)return {mode:'walk',min:9,same:true};
+  var A=AGEO[ha],B=AGEO[areaId];if(!A||!B)return null;
+  var km=kmBetween(A,B);
+  var w=Math.round(km*13);                       // Fussweg mit Umwegfaktor
+  if(w<=20)return {mode:'walk',min:Math.max(3,w),km:km};
+  var t=Math.max(6,Math.round(8+km*2.0));        // Weg zur Station, Wartezeit, Fahrt
+  return {mode:'ride',min:t,km:km,how:TRANSIT[d.city]||'Bahn'};
+}
+function distLabel(x){
+  if(!x)return '';
+  if(x.mode==='walk')return '<span class="dist"><span class="dico">🚶</span>'+
+    (x.same?'im Viertel · ':'')+'ca. '+x.min+' Min zu Fuss</span>';
+  return '<span class="dist ride"><span class="dico">'+(x.how==='Tram'?'🚋':x.how==='Bus'?'🚌':'🚇')+'</span>ca. '+
+    x.min+' Min · '+esc(x.how)+'</span>';
+}
+
 /* ============ STATE ============ */
 var S={brief:{days:14,budget:3000,pace:'normal',interests:{},classics:'some',hotels:true,flights:true,persons:2},
        trip:null,view:'overview',area:{},mode:'all',qi:0,step:'cities'};
@@ -1395,7 +1477,9 @@ function renderCity(cid){
     all.map(function(a,i){var n=planCount(d,a.id);
       return '<button class="achip" data-act="area" data-c="'+cid+'" data-a="'+a.id+'" aria-selected="'+(sel===a.id)+'">'+
         '<b aria-hidden="true">'+jnum(i)+'</b>'+
-        esc(a.t)+' <small>'+n+'/'+a.pois.length+'</small></button>';}).join('')+'</div>';
+        esc(a.t)+' <small>'+n+'/'+a.pois.length+'</small>'+
+        (function(){var x=fromHotel(d,a.id);return x?'<span class="achip-d">'+x.min+'′</span>':'';})()+
+        '</button>';}).join('')+'</div>';
   var scope=sel==='__all'?all:all.filter(function(a){return a.id===sel;});
   var cards=[],onCount=0,offCount=0;
   scope.forEach(function(a,ai2){
@@ -1412,6 +1496,8 @@ function renderCity(cid){
   });
   h+='<div class="gridnote">'+
      '<span class="gn-on"><b>'+onCount+'</b> gestempelt</span>'+
+     (sel!=='__all'?(function(){var x=fromHotel(d,sel);return x?distLabel(x)+'<span class="gn-hint">ab '+
+        esc((hotelOf(d)||{}).n||'Unterkunft')+'</span>':'';})():'')+
      (S.mode==='plan'
        ? '<span class="gn-off">Weitere ausgeblendet — <button class="linkish" data-act="mode" data-m="all">alle zeigen</button></span>'
        : (offCount?'<span class="gn-off"><b>'+offCount+'</b> weitere hier — antippen zum Hinzufügen</span>'
@@ -1428,6 +1514,7 @@ function renderCity(cid){
       h+='<div class="grouphead"><span class="gh-k">'+jnum(o.idx)+'</span>'+
          '<span class="gh-t">'+esc(o.head.t)+'</span>'+
          '<span class="gh-n num">'+o.n+'/'+o.tot+'</span>'+
+         (function(){var x=fromHotel(d,o.head.id);return x?'<span class="gh-d">'+distLabel(x)+'</span>':'';})()+
          (o.head.hint?'<span class="gh-h">'+esc(o.head.hint)+'</span>':'')+'</div>';
       return;}
     var p=o.p,on=!!o.it,isM=(p.res==='req'||p.cat==='tour');
