@@ -6,7 +6,7 @@
 <title>Meguri Trip Builder</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Manrope:wght@400;500;600;700;800&family=Zen+Kaku+Gothic+New:wght@500;700;900&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Manrope:wght@400;500;600;700;800&family=Shippori+Mincho:wght@500;600;700;800&display=swap">
 
 <style>
 /* hell ist der Entwurf, dunkel die Umkehrung */
@@ -20,7 +20,8 @@
   --shadow:0 1px 2px rgba(23,18,20,.05),0 6px 16px rgba(23,18,20,.055);
   --shadow-md:0 2px 6px rgba(23,18,20,.07),0 14px 32px rgba(23,18,20,.09);
   --shadow-lg:0 8px 24px rgba(23,18,20,.12),0 32px 64px rgba(23,18,20,.16);
-  --display:"Zen Kaku Gothic New","Hiragino Kaku Gothic ProN",system-ui,sans-serif;
+  --display:"Shippori Mincho","Hiragino Mincho ProN","Yu Mincho",Georgia,serif;
+  --jp:"Shippori Mincho","Hiragino Mincho ProN",serif;
   --body:"Manrope",system-ui,-apple-system,"Segoe UI",sans-serif;
   --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
   --r:18px; --r-sm:12px;
@@ -81,7 +82,7 @@ canvas{display:block}
 .mark-badge{width:29px;height:29px;border-radius:9px;background:var(--accent);color:#fff;display:grid;place-items:center;font-size:14px}
 .lhero{flex:1;display:grid;place-items:center;padding:24px 22px 80px}
 .lhero-in{max-width:740px;text-align:center;display:flex;flex-direction:column;gap:22px;align-items:center}
-.lhero h1{font-size:clamp(38px,7vw,70px);font-weight:900;line-height:1.02}
+.lhero h1{font-size:clamp(36px,6.4vw,66px);font-weight:800;line-height:1.14;letter-spacing:-.015em}
 .lhero h1 em{font-style:normal;color:var(--accent)}
 .lead{font-size:clamp(15.5px,2vw,18.5px);color:var(--ink-2);max-width:52ch}
 .cta-row{display:flex;gap:11px;flex-wrap:wrap;justify-content:center;margin-top:6px}
@@ -93,7 +94,7 @@ canvas{display:block}
 .ob-bar i{display:block;height:100%;background:var(--accent);transition:width .3s;width:0}
 .ob-body{flex:1;display:grid;place-items:center;padding:36px 22px}
 .ob-card{width:100%;max-width:640px;display:flex;flex-direction:column;gap:26px}
-.ob-q h2{font-size:29px;font-weight:900;margin-top:6px}
+.ob-q h2{font-size:31px;font-weight:700;margin-top:8px;line-height:1.18}
 .ob-q p{color:var(--ink-2);font-size:14px;margin-top:6px}
 .opts{display:flex;flex-direction:column;gap:9px}
 .opt{display:block;padding:15px 18px;border:1px solid var(--line);border-radius:var(--r-sm);background:var(--surface);transition:all .14s}
@@ -129,7 +130,7 @@ input[type=range]{width:100%;accent-color:var(--accent)}
 .bar-in{max-width:1200px;margin:0 auto;padding:12px 22px;display:flex;flex-direction:column;gap:11px}
 .bar-top{display:flex;align-items:center;gap:13px}
 .bar-id{flex:1;min-width:0}
-.bar-t{font-family:var(--display);font-weight:900;font-size:18px;line-height:1.25;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.bar-t{font-family:var(--display);font-weight:700;font-size:18px;line-height:1.25;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .bar-s{font-size:12px;color:var(--ink-3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .tools{display:flex;gap:8px;align-items:center}
 .tgl{display:inline-flex;align-items:center;gap:8px;padding:8px 14px;border-radius:999px;border:1px solid var(--line);font-size:12.5px;font-weight:600;background:var(--surface);color:var(--ink-2)}
@@ -153,10 +154,10 @@ input[type=range]{width:100%;accent-color:var(--accent)}
 .ctab small{font-family:var(--mono);font-size:11px;opacity:.6;font-weight:500}
 .ctab-add{padding:6px 15px;color:var(--ink-2);font-weight:600}
 
-.wrap{max-width:1200px;margin:0 auto;padding:26px 22px 96px}
-.sec{margin-bottom:34px}
+.wrap{max-width:1200px;margin:0 auto;padding:34px 22px 96px}
+.sec{margin-bottom:44px}
 .sechead{display:flex;align-items:baseline;gap:12px;margin-bottom:15px;flex-wrap:wrap}
-.sechead h2{font-size:21px;font-weight:900}
+.sechead h2{font-size:23px;font-weight:700;letter-spacing:-.01em}
 .cnt{font-family:var(--mono);font-size:12px;color:var(--ink-3)}
 
 /* Bildkachel */
@@ -172,7 +173,7 @@ input[type=range]{width:100%;accent-color:var(--accent)}
 .citycard:hover .pthumb canvas,.citycard:hover .pthumb img{transform:scale(1.05)}
 .ccn{position:absolute;top:9px;right:9px;background:rgba(255,255,255,.94);color:#171214;border-radius:999px;padding:4px 11px;font-family:var(--mono);font-size:11px;font-weight:600;backdrop-filter:blur(6px)}
 .cc{display:block;padding:12px 8px 6px}
-.cc-t{font-family:var(--display);font-weight:900;font-size:21px;letter-spacing:-.025em;display:flex;align-items:baseline;gap:8px}
+.cc-t{font-family:var(--display);font-weight:700;font-size:22px;letter-spacing:-.015em;display:flex;align-items:baseline;gap:8px}
 .cc-t small{font-family:var(--display);font-size:12.5px;color:var(--ink-3);font-weight:500}
 .ccm{font-family:var(--mono);font-size:11.5px;color:var(--ink-3);margin-top:3px;display:block}
 
@@ -190,8 +191,11 @@ input[type=range]{width:100%;accent-color:var(--accent)}
 .chero-img{width:230px;flex:none}
 .chero-img .pthumb{aspect-ratio:16/10}
 .chero-body{flex:1;min-width:210px;display:flex;align-items:center;gap:14px;flex-wrap:wrap;padding-right:6px}
-.chero-t{font-family:var(--display);font-size:34px;font-weight:900;letter-spacing:-.03em;display:flex;align-items:baseline;gap:10px}
-.chero-t small{font-family:var(--display);font-size:16px;color:var(--ink-3);font-weight:500}
+.chero-t{font-family:var(--display);font-size:38px;font-weight:800;letter-spacing:-.02em;line-height:1.05}
+.jp-vert{writing-mode:vertical-rl;text-orientation:upright;font-family:var(--jp);font-weight:600;
+  letter-spacing:.18em;color:var(--accent);font-size:26px;line-height:1;
+  border-right:1px solid var(--line);padding:6px 14px 6px 0;margin:2px 6px 2px 0;
+  align-self:center;min-height:58px}
 .cm{font-family:var(--mono);font-size:12px;color:var(--ink-3);margin-top:3px}
 .nightctl{display:flex;align-items:center;gap:8px;background:var(--surface-2);border-radius:999px;padding:5px 7px}
 .nightctl button{width:28px;height:28px;border-radius:50%;background:var(--surface);border:1px solid var(--line);display:grid;place-items:center;font-size:16px;font-weight:700;color:var(--ink)}
@@ -207,8 +211,8 @@ input[type=range]{width:100%;accent-color:var(--accent)}
 .hname{font-weight:800;font-size:13.5px;margin-top:5px;line-height:1.3}
 .hprice{font-family:var(--mono);font-size:16px;font-weight:600;margin-top:6px}
 .hmeta{font-size:11.5px;color:var(--ink-3);margin-top:4px}
-.hcheck{position:absolute;top:12px;right:12px;width:19px;height:19px;border-radius:50%;border:1.5px solid var(--line-2);display:grid;place-items:center;font-size:10px;color:transparent}
-.hcard[aria-pressed="true"] .hcheck{background:var(--accent);border-color:var(--accent);color:#fff}
+.hcheck{position:absolute;top:12px;right:12px;width:24px;height:24px;border-radius:5px;border:1.5px dashed var(--line-2);display:grid;place-items:center;font-family:var(--jp);font-size:12px;color:transparent;transition:all .16s}
+.hcard[aria-pressed="true"] .hcheck{border:2px solid var(--accent);border-style:solid;color:var(--accent);transform:rotate(-7deg)}
 
 /* Gegenden-Chips + Umschalter */
 .areachips{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;padding-bottom:2px;margin-bottom:18px}
@@ -218,6 +222,8 @@ input[type=range]{width:100%;accent-color:var(--accent)}
 .achip[aria-selected="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
 .achip[aria-selected="true"] small{color:rgba(255,255,255,.6)}
 .achip i{width:7px;height:7px;border-radius:50%;flex:none}
+.achip b{font-family:var(--jp);font-size:14px;font-weight:600;color:var(--accent);min-width:13px;text-align:center}
+.achip[aria-selected="true"] b{color:rgba(255,255,255,.8)}
 .achip small{font-family:var(--mono);font-size:11px;color:var(--ink-3);font-weight:500}
 .vswitch{display:inline-flex;background:var(--surface-2);border-radius:999px;padding:3px;gap:2px}
 .vswitch button{padding:7px 16px;border-radius:999px;font-size:12.5px;font-weight:700;color:var(--ink-3);text-align:center}
@@ -230,8 +236,19 @@ input[type=range]{width:100%;accent-color:var(--accent)}
 .pcard:hover .pthumb canvas,.pcard:hover .pthumb img{transform:scale(1.05)}
 .pgrid[data-mode="all"] .pcard.on{border-color:var(--accent);box-shadow:inset 0 0 0 1px var(--accent),var(--shadow)}
 .pcard.off .pthumb canvas,.pcard.off .pthumb img{filter:saturate(.55) brightness(1.06)}
-.psel{position:absolute;top:9px;right:9px;width:28px;height:28px;border-radius:50%;background:rgba(255,255,255,.92);backdrop-filter:blur(6px);border:1px solid rgba(23,18,20,.12);display:grid;place-items:center;color:var(--ink-2);font-size:14px;font-weight:700;z-index:3;transition:all .14s}
-.pcard.on .psel{background:var(--accent);border-color:var(--accent);color:#fff}
+/* Siegelstempel — leeres Feld wartet, gesetzter Stempel sitzt schief auf */
+.psel{position:absolute;top:10px;right:10px;width:36px;height:36px;border-radius:7px;z-index:3;
+  display:grid;place-items:center;font-family:var(--jp);font-size:16px;font-weight:700;
+  border:1.5px dashed rgba(255,255,255,.55);color:rgba(255,255,255,.7);
+  background:rgba(12,9,10,.28);backdrop-filter:blur(3px);
+  transition:transform .16s cubic-bezier(.34,1.56,.64,1),background .16s,border-color .16s,color .16s}
+.pcard:hover .psel{border-color:rgba(255,255,255,.85);color:#fff}
+.pcard.on .psel{border:2px solid var(--accent);border-style:solid;color:var(--accent);
+  background:rgba(255,255,255,.9);transform:rotate(-7deg);
+  box-shadow:0 1px 3px rgba(23,18,20,.14)}
+.pcard.on .psel::after{content:"";position:absolute;inset:3px;border:1px solid var(--accent);border-radius:4px;opacity:.5}
+.pcard.stamping .psel{transform:rotate(-7deg) scale(.82)}
+@media (prefers-reduced-motion:reduce){.pcard.on .psel{transform:rotate(-7deg)}.pcard.stamping .psel{transform:rotate(-7deg)}}
 .ptag{position:absolute;top:9px;left:9px;z-index:3;background:var(--gold);color:#fff;border-radius:999px;padding:4px 10px;font-size:10.5px;font-weight:800}
 .ptag.tour{background:var(--money)}
 .pacts{position:absolute;left:9px;bottom:9px;display:flex;gap:6px;z-index:3;opacity:0;transition:opacity .15s}
@@ -240,7 +257,7 @@ input[type=range]{width:100%;accent-color:var(--accent)}
 .pmini:hover{color:var(--ink)}
 .pmini[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:#fff}
 .pc{padding:12px 8px 5px}
-.pc-n{font-weight:800;font-size:14.5px;line-height:1.3;letter-spacing:-.01em}
+.pc-n{font-family:var(--display);font-weight:700;font-size:15.5px;line-height:1.28;letter-spacing:-.005em}
 .pcard.pinned .pc-n::before{content:"📌 ";font-size:11px}
 .pc-jp{font-family:var(--display);font-size:11px;color:var(--ink-3);font-weight:500;margin-top:1px}
 .pc-m{display:flex;gap:8px;align-items:center;margin-top:7px;font-size:11.5px;color:var(--ink-2);flex-wrap:wrap}
@@ -265,7 +282,7 @@ body.money .has-mk{outline:1.5px dashed var(--money);outline-offset:3px}
 .modal.open{display:grid}
 .scrim{position:absolute;inset:0;background:rgba(23,18,20,.4);backdrop-filter:blur(4px)}
 .msheet{position:relative;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--shadow-lg);width:min(540px,100%);max-height:86vh;overflow-y:auto;padding:26px}
-.msheet h3{font-size:22px;font-weight:900;margin-bottom:6px;padding-right:36px}
+.msheet h3{font-size:22px;font-weight:700;margin-bottom:6px;padding-right:36px}
 .msheet>p{font-size:14px;color:var(--ink-2);margin-bottom:18px}
 .mx{position:absolute;top:16px;right:16px;width:32px;height:32px;border-radius:50%;display:grid;place-items:center;background:var(--surface-2);border:1px solid var(--line);font-size:14px;color:var(--ink-2);z-index:2}
 .mx:hover{background:var(--surface-3);color:var(--ink)}
@@ -738,6 +755,8 @@ function tripTitle(){
   var ks=Object.keys(S.brief.interests).sort(function(a,b){return S.brief.interests[b]-S.brief.interests[a];});
   return S.brief.days+' Tage '+(ks.length?ks.slice(0,3).map(function(k){return N[k]||k;}).join(', '):'Japan');
 }
+var KANJI='一二三四五六七八九十'.split('');
+function jnum(i){return i<10?KANJI[i]:String(i+1);}
 function mk(n,l){return '<span class="mk"><b>'+n+'</b>'+esc(l)+'</span>';}
 function tag(p){
   if(p.cat==='tour')return '<span class="ptag tour">Geführte Tour</span>';
@@ -749,7 +768,7 @@ function totalPlaces(){var n=0;S.trip.dests.forEach(function(d){d.areas.forEach(
 function renderApp(){
   var t=S.trip;
   $('#t-title').textContent=tripTitle();
-  $('#t-meta').textContent=t.dests.map(function(d){return CITIES[d.city].n;}).join(' → ')+' · '+totalPlaces()+' Orte';
+  $('#t-meta').textContent=t.dests.map(function(d){return CITIES[d.city].n;}).join(' → ')+' · '+totalPlaces()+' Orte gesammelt';
   var g=budget(),max=Math.max(g.total,g.budget);
   $('#meter').innerHTML=[['f','#4C7FD1'],['h','#3FB98A'],['t','#A57BEA'],['a','#D9A441'],['o','#C08B5C']]
     .map(function(x,i){return '<i style="width:'+([g.f,g.h,g.t,g.a,g.fo][i]/max*100)+'%;background:'+x[1]+'"></i>';}).join('');
@@ -776,7 +795,7 @@ function renderOverview(){
       '<span class="pthumb">'+thumb('city:'+d.city,'city|'+d.city,C.n)+
       '<span class="ccn">'+d.nights+' '+(d.nights===1?'Nacht':'Nächte')+'</span></span>'+
       '<span class="cc"><span class="cc-t">'+esc(C.n)+' <small>'+C.jp+'</small></span>'+
-      '<span class="ccm">'+n+' Orte'+(S.brief.hotels&&ho?' · '+chf(ho.chf)+'/Nacht':'')+'</span></span></button>';
+      '<span class="ccm">'+n+' gesammelt'+(S.brief.hotels&&ho?' · '+chf(ho.chf)+'/Nacht':'')+'</span></span></button>';
   });
   h+='</div></div>';
   h+='<div class="sec"><div class="sechead"><h2>Vor der Reise</h2></div><div class="tiles">';
@@ -802,9 +821,10 @@ function renderCity(cid){
   if(!S.area[cid])S.area[cid]='__all';
   var sel=S.area[cid],all=cityAreas(cid),h='';
   h+='<div class="chero"><div class="chero-img"><div class="pthumb">'+thumb('city:'+cid,'city|'+cid,C.n)+'</div></div>'+
-    '<div class="chero-body"><div style="flex:1;min-width:150px">'+
-    '<div class="chero-t">'+esc(C.n)+' <small>'+C.jp+'</small></div>'+
-    '<div class="cm">'+d.areas.reduce(function(s,a){return s+a.items.length;},0)+' Orte geplant</div></div>'+
+    '<div class="chero-body"><div class="jp-vert" aria-hidden="true">'+C.jp+'</div>'+
+    '<div style="flex:1;min-width:140px">'+
+    '<div class="chero-t">'+esc(C.n)+'</div>'+
+    '<div class="cm">'+d.areas.reduce(function(s,a){return s+a.items.length;},0)+' Orte gesammelt</div></div>'+
     '<div class="nightctl"><button data-act="night" data-c="'+cid+'" data-n="-1" aria-label="Weniger Nächte">−</button>'+
     '<span>'+d.nights+' '+(d.nights===1?'Nacht':'Nächte')+'</span>'+
     '<button data-act="night" data-c="'+cid+'" data-n="1" aria-label="Mehr Nächte">+</button></div>'+
@@ -814,7 +834,7 @@ function renderCity(cid){
     h+='<div class="sec"><div class="sechead"><h2>Unterkunft</h2><span class="cnt">'+d.nights+' Nächte</span></div><div class="hotels">';
     C.hotels.forEach(function(x){
       h+='<button class="hcard'+(x.id===d.hotel?' has-mk':'')+'" data-act="hotel" data-c="'+cid+'" data-h="'+x.id+'" aria-pressed="'+(x.id===d.hotel)+'">'+
-        (x.id===d.hotel?mk(2,'Hotel'):'')+'<span class="hcheck">✓</span>'+
+        (x.id===d.hotel?mk(2,'Hotel'):'')+'<span class="hcheck">泊</span>'+
         '<div class="hlab">'+esc(x.lab)+'</div><div class="hname">'+esc(x.n)+'</div>'+
         '<div class="hprice">'+chf(x.chf)+'<span style="font-size:11px;font-family:var(--body);color:var(--ink-3)"> /Nacht</span></div>'+
         '<div class="hmeta">'+esc(x.s)+'</div></button>';
@@ -828,7 +848,8 @@ function renderCity(cid){
   h+='<div class="areachips"><button class="achip" data-act="area" data-c="'+cid+'" data-a="__all" aria-selected="'+(sel==='__all')+'">Alle Gegenden</button>'+
     all.map(function(a,i){var n=planCount(d,a.id);
       return '<button class="achip" data-act="area" data-c="'+cid+'" data-a="'+a.id+'" aria-selected="'+(sel===a.id)+'">'+
-        '<i style="background:'+COL[i%COL.length]+'"></i>'+esc(a.t)+' <small>'+n+'</small></button>';}).join('')+'</div>';
+        '<b aria-hidden="true">'+jnum(i)+'</b>'+
+        esc(a.t)+' <small>'+n+'</small></button>';}).join('')+'</div>';
   var scope=sel==='__all'?all:all.filter(function(a){return a.id===sel;});
   var cards=[];
   scope.forEach(function(a){
@@ -847,7 +868,7 @@ function renderCity(cid){
     h+='<div class="pcard '+(on?'on':'off')+(o.it&&o.it.locked?' pinned':'')+(isM?' has-mk':'')+'" role="button" tabindex="0" '+
       'data-act="toggle" data-p="'+p.id+'" data-a="'+o.a.id+'" data-c="'+cid+'" aria-pressed="'+on+'" aria-label="'+esc(p.n)+'">'+
       '<div class="pthumb">'+thumb(p.id,p.id+'|'+p.cat,p.n)+
-      tag(p)+'<span class="psel">'+(on?'✓':'+')+'</span>'+
+      tag(p)+'<span class="psel">'+(on?'巡':'+')+'</span>'+
       (on?'<span class="pacts">'+
         '<button class="pmini" data-act="pin" data-p="'+p.id+'" data-a="'+o.a.id+'" data-c="'+cid+'" aria-pressed="'+(o.it.locked)+'" aria-label="Fixieren">📌</button>'+
         '<button class="pmini" data-act="swap" data-p="'+p.id+'" data-a="'+o.a.id+'" data-c="'+cid+'" aria-label="Ersetzen">⇄</button></span>':'')+
@@ -1004,8 +1025,11 @@ document.addEventListener('click',function(e){
       var removed=src.items.splice(idx,1)[0];renderApp();
       toast(p.n+' entfernt.',function(){src.items.splice(idx,0,removed);renderApp();});
     } else {
-      var en=areaEntry(d,aid,true);en.items.push({id:pid,locked:false});renderApp();
-      toast(p.n+' hinzugefügt.');
+      var en=areaEntry(d,aid,true);en.items.push({id:pid,locked:false});
+      var card=t;renderApp();
+      var fresh=document.querySelector('.pcard[data-p="'+pid+'"]');
+      if(fresh){fresh.classList.add('stamping');setTimeout(function(){fresh.classList.remove('stamping');},170);}
+      toast(p.n+' gestempelt.');
     }
   }
   else if(a==='pin'){
