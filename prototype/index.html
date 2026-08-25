@@ -83,18 +83,54 @@ canvas{display:block}
 
 /* landing */
 .landing{min-height:100vh;display:flex;flex-direction:column;position:relative;overflow:hidden;background:var(--bg)}
-#bg-art{position:absolute;inset:0;width:100%;height:100%;z-index:0}
+#bg-art{position:absolute;top:0;left:0;right:0;height:640px;width:100%;z-index:0;
+  -webkit-mask-image:linear-gradient(to bottom,#000 55%,transparent 100%);
+  mask-image:linear-gradient(to bottom,#000 55%,transparent 100%)}
 .landing>*:not(#bg-art){position:relative;z-index:1}
 .lnav{display:flex;align-items:center;justify-content:space-between;padding:22px 28px}
 .mark{display:flex;align-items:center;gap:10px;font-family:var(--display);font-weight:900;font-size:19px}
 .mark-badge{width:29px;height:29px;border-radius:9px;background:var(--accent);color:#fff;display:grid;place-items:center;font-size:14px}
-.lhero{flex:1;display:grid;place-items:center;padding:24px 22px 80px}
-.lhero-in{max-width:740px;text-align:center;display:flex;flex-direction:column;gap:22px;align-items:center}
-.lhero h1{font-size:clamp(36px,6.4vw,66px);font-weight:800;line-height:1.14;letter-spacing:-.015em}
+.lwrap{max-width:1160px;margin:0 auto;padding:10px 24px 90px;width:100%}
+.lhero{display:flex;gap:40px;align-items:center;padding:52px 0 68px;border-bottom:1px solid var(--line)}
+.lhero-txt{flex:1;min-width:0;display:flex;flex-direction:column;gap:20px;align-items:flex-start}
+.lhero h1{font-size:clamp(34px,5.2vw,60px);font-weight:800;line-height:1.12;letter-spacing:-.02em}
 .lhero h1 em{font-style:normal;color:var(--accent)}
-.lead{font-size:clamp(15.5px,2vw,18.5px);color:var(--ink-2);max-width:52ch}
-.cta-row{display:flex;gap:11px;flex-wrap:wrap;justify-content:center;margin-top:6px}
-.note{font-size:12.5px;color:var(--ink-3);max-width:60ch;background:var(--surface);border:1px solid var(--line);padding:11px 16px;border-radius:var(--r-sm);box-shadow:var(--shadow)}
+.lead{font-size:clamp(15px,1.5vw,17.5px);color:var(--ink-2);max-width:50ch}
+.cta-row{display:flex;gap:11px;flex-wrap:wrap;margin-top:4px}
+.cta-row .btn-ghost{text-decoration:none}
+.lhero-mark{flex:none;display:grid;place-items:center;width:170px}
+.jp-big{writing-mode:vertical-rl;text-orientation:upright;font-family:var(--jp);font-size:96px;font-weight:700;
+  letter-spacing:.14em;color:var(--accent);opacity:.22;line-height:1}
+.lsec{padding:42px 0;border-bottom:1px solid var(--line)}
+.lsec:last-of-type{border-bottom:none}
+.lsec-head{display:flex;align-items:baseline;gap:12px;margin-bottom:6px}
+.lsec-num{font-family:var(--jp);font-size:17px;color:var(--accent);font-weight:700}
+.lsec-head h2{font-size:25px;font-weight:700;letter-spacing:-.015em}
+.lsec-sub{color:var(--ink-2);font-size:14.5px;margin:6px 0 18px;max-width:62ch}
+.ways{display:grid;grid-template-columns:repeat(auto-fit,minmax(268px,1fr));gap:14px;margin-top:20px}
+.way{display:flex;flex-direction:column;gap:8px;padding:22px;border:1px solid var(--line);border-radius:var(--r);
+  background:var(--surface);box-shadow:var(--shadow);transition:transform .16s,box-shadow .16s,border-color .16s}
+.way:hover{transform:translateY(-3px);box-shadow:var(--shadow-md);border-color:var(--accent)}
+.way-ico{font-size:24px}
+.way-t{font-family:var(--display);font-size:19px;font-weight:700;letter-spacing:-.01em}
+.way-d{font-size:13.5px;color:var(--ink-2);line-height:1.5;flex:1}
+.way-go{font-size:13px;font-weight:700;color:var(--accent);margin-top:6px}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(168px,1fr));gap:14px;margin-top:20px}
+.stat{display:flex;flex-direction:column;gap:2px;padding:20px;border:1px solid var(--line);border-radius:var(--r);background:var(--surface)}
+.stat-n{font-size:38px;font-weight:600;line-height:1;color:var(--accent)}
+.stat-t{font-weight:700;font-size:14.5px;margin-top:6px}
+.stat-d{font-size:12.5px;color:var(--ink-3)}
+.lchips{margin-top:18px}
+.lchips .chip{cursor:pointer}
+.note{font-size:12.5px;color:var(--ink-3);max-width:64ch;background:var(--surface);border:1px solid var(--line);
+  padding:13px 17px;border-radius:var(--r-sm);margin-top:34px}
+@media(max-width:820px){
+  .lhero{flex-direction:column;align-items:flex-start;gap:22px;padding:34px 0 44px}
+  .lhero-mark{width:100%;justify-items:start}
+  .jp-big{writing-mode:horizontal-tb;font-size:56px;letter-spacing:.06em}
+  .lwrap{padding:6px 18px 70px}
+  .lsec{padding:32px 0}
+}
 
 /* onboarding */
 .ob{min-height:100vh;display:flex;flex-direction:column;background:var(--bg)}
@@ -118,6 +154,19 @@ canvas{display:block}
 .chip[data-star="1"]::after{content:" ★"}
 input[type=range]{width:100%;accent-color:var(--accent)}
 .slider-val{font-family:var(--mono);font-size:34px;font-weight:600}
+.dayctl{display:flex;align-items:center;gap:12px}
+.daybtn{width:44px;height:44px;border-radius:50%;border:1px solid var(--line-2);background:var(--surface);
+  display:grid;place-items:center;font-size:22px;font-weight:700;color:var(--ink);flex:none;transition:all .14s}
+.daybtn:hover{border-color:var(--accent);color:var(--accent)}
+#dayin{width:104px;font-family:var(--mono);font-size:38px;font-weight:600;text-align:center;
+  border:none;background:none;color:var(--ink);padding:0;-moz-appearance:textfield}
+#dayin::-webkit-outer-spin-button,#dayin::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
+.dayunit{font-size:15px;color:var(--ink-3);font-weight:600}
+.daychips{display:flex;gap:7px;flex-wrap:wrap;margin:14px 0 4px}
+.daychip{min-width:44px;padding:8px 12px;border-radius:999px;border:1px solid var(--line);background:var(--surface);
+  font-family:var(--mono);font-size:13px;font-weight:600;color:var(--ink-2);text-align:center;transition:all .14s}
+.daychip:hover{border-color:var(--line-2)}
+.daychip[aria-pressed="true"]{background:var(--accent);color:#fff;border-color:var(--accent)}
 .calib{font-size:13.5px;color:var(--ink-2);background:var(--surface);border:1px solid var(--line);border-left:3px solid var(--accent);padding:12px 16px;border-radius:0 var(--r-sm) var(--r-sm) 0}
 .ob-foot{display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--line);padding-top:20px}
 .linkish{font-size:14px;color:var(--ink-3);text-decoration:underline;text-underline-offset:3px}
@@ -205,6 +254,21 @@ input[type=range]{width:100%;accent-color:var(--accent)}
   border-right:1px solid var(--line);padding:6px 14px 6px 0;margin:2px 6px 2px 0;
   align-self:center;min-height:58px}
 .cm{font-family:var(--mono);font-size:12px;color:var(--ink-3);margin-top:3px}
+.whyline{display:inline-flex;align-items:center;gap:7px;margin-top:9px;padding:6px 12px;border-radius:999px;
+  background:var(--accent-soft);border:1px solid transparent;color:var(--ink-2);font-size:12.5px;font-weight:600;
+  transition:border-color .14s}
+.whyline:hover{border-color:var(--accent)}
+.whydot{width:6px;height:6px;border-radius:50%;background:var(--accent);flex:none}
+.whymore{color:var(--accent);text-decoration:underline;text-underline-offset:2px}
+.whygrid{display:flex;flex-direction:column;gap:9px;margin:4px 0 14px}
+.whyrow{display:flex;align-items:center;gap:11px;font-size:13.5px}
+.whyname{width:132px;flex:none;font-weight:600}
+.whyname b{color:var(--accent)}
+.whybar{flex:1;height:7px;border-radius:999px;background:var(--surface-3);overflow:hidden}
+.whybar i{display:block;height:100%;background:var(--accent);border-radius:999px}
+.whyval{width:40px;text-align:right;color:var(--ink-3);font-size:12px}
+.whyfoot{font-size:12.5px;color:var(--ink-3);margin-bottom:6px}
+.whyh{font-family:var(--display);font-size:16px;font-weight:700;margin:18px 0 10px}
 .nightctl{display:flex;align-items:center;gap:8px;background:var(--surface-2);border-radius:999px;padding:5px 7px}
 .nightctl button{width:28px;height:28px;border-radius:50%;background:var(--surface);border:1px solid var(--line);display:grid;place-items:center;font-size:16px;font-weight:700;color:var(--ink)}
 .nightctl button:hover{border-color:var(--accent);color:var(--accent)}
@@ -337,19 +401,63 @@ body.money .has-mk{outline:1.5px dashed var(--money);outline-offset:3px}
   <canvas id="bg-art"></canvas>
   <nav class="lnav">
     <div class="mark"><span class="mark-badge">巡</span> Meguri</div>
-    <button class="icobtn" id="theme-btn" aria-label="Hell / Dunkel">◐</button>
-  </nav>
-  <div class="lhero"><div class="lhero-in">
-    <p class="eyebrow">Prototyp · Japan</p>
-    <h1>Sag uns, was dich interessiert.<br>Wir bauen die <em>Route</em>.</h1>
-    <p class="lead">Eine komplette Japan-Reise in 60 Sekunden. Danach suchst du jeden einzelnen Ort selbst aus — antippen genügt.</p>
-    <div class="cta-row">
-      <button class="btn btn-primary" id="go-plan">✨ Plan für mich erstellen</button>
-      <button class="btn btn-ghost" id="go-build">🧩 Selber bauen</button>
+    <div style="display:flex;gap:8px;align-items:center">
+      <button class="btn btn-ghost btn-sm" id="install-btn-2" hidden>＋ Startbildschirm</button>
+      <button class="icobtn" id="theme-btn" aria-label="Hell / Dunkel">◐</button>
     </div>
-    <button class="btn btn-ghost btn-sm" id="install-btn-2" hidden>＋ Zum Startbildschirm hinzufügen</button>
-    <p class="note">Klickbarer Prototyp. Die Orte sind echt, <b>Preise und Öffnungszeiten sind Beispieldaten</b>. Die Bilder sind erzeugte Platzhalter — später stehen dort Fotos.</p>
-  </div></div>
+  </nav>
+
+  <div class="lwrap">
+    <header class="lhero">
+      <div class="lhero-txt">
+        <p class="eyebrow">Japan · 14 Städte · Prototyp</p>
+        <h1>Sag uns, was dich<br>interessiert. Wir bauen<br>die <em>Route</em>.</h1>
+        <p class="lead">Eine komplette Japanreise in 60 Sekunden — mit Begründung, warum jede Stadt im Plan steht. Danach stempelst du dir jeden Ort selbst zusammen.</p>
+        <div class="cta-row">
+          <button class="btn btn-primary" data-go="plan">✨ Plan für mich erstellen</button>
+          <a class="btn btn-ghost" href="#wege">So funktioniert es</a>
+        </div>
+      </div>
+      <div class="lhero-mark" aria-hidden="true"><span class="jp-big">日本</span></div>
+    </header>
+
+    <section class="lsec" id="wege">
+      <div class="lsec-head"><span class="lsec-num">一</span><h2>Drei Wege zu deiner Route</h2></div>
+      <div class="ways">
+        <button class="way" data-go="plan">
+          <span class="way-ico">✨</span>
+          <span class="way-t">Plan für mich erstellen</span>
+          <span class="way-d">Ein paar Fragen zu Dauer, Budget und Interessen — daraus entsteht eine vollständige Route mit Städten, Gegenden, Orten und Kosten.</span>
+          <span class="way-go">Fragebogen starten →</span>
+        </button>
+        <button class="way" data-go="build">
+          <span class="way-ico">🧩</span>
+          <span class="way-t">Selber bauen</span>
+          <span class="way-d">Leerer Trip. Du wählst Städte und stempelst dir die Orte einzeln zusammen. Die AI hilft nur, wenn du sie fragst.</span>
+          <span class="way-go">Leer beginnen →</span>
+        </button>
+        <button class="way" data-go="tours">
+          <span class="way-ico">📋</span>
+          <span class="way-t">Fertige Route übernehmen</span>
+          <span class="way-d">Eine kuratierte Route als Ausgangspunkt — hier: Anime &amp; Otaku, 12 Tage. Danach ganz normal veränderbar.</span>
+          <span class="way-go">Route ansehen →</span>
+        </button>
+      </div>
+    </section>
+
+    <section class="lsec">
+      <div class="lsec-head"><span class="lsec-num">二</span><h2>Was dahintersteckt</h2></div>
+      <div class="stats" id="lstats"></div>
+    </section>
+
+    <section class="lsec">
+      <div class="lsec-head"><span class="lsec-num">三</span><h2>Wonach wir sortieren</h2></div>
+      <p class="lsec-sub">Deine Interessen bestimmen, welche Städte vorgeschlagen werden und welche Orte in den Gegenden landen.</p>
+      <div class="chips lchips" id="lchips"></div>
+    </section>
+
+    <p class="note">Klickbarer Prototyp. Die Orte sind echt, <b>Preise und Öffnungszeiten sind Beispieldaten</b>. Die Bilder sind erzeugte Platzhalter — später stehen dort Fotos. Es wird nichts gebucht und nichts gespeichert.</p>
+  </div>
 </section>
 
 <section class="screen ob" id="s-ob" hidden>
@@ -534,6 +642,148 @@ var AREAS=[
         P('usj','Universal Studios Japan','ユニバーサル・スタジオ','park',['gaming','anime'],8600,480,'req',0,'Braucht einen ganzen Tag und ein Ticket im Voraus.')]}
 ];
 
+
+/* ============ WEITERE STÄDTE ============ */
+Object.assign(CITIES,{
+ nara:{n:'Nara',jp:'奈良',c:'--l-chiyoda',ideal:1,min:1,max:2,axis:62,
+  fit:{tradition:1,history:.9,nature:.6,photo:.8,food:.4},
+  intro:'Älteste Hauptstadt Japans: Riesenbuddha, freilaufende Rehe, alles zu Fuss. Als Halbtagesausflug ab Kyoto oder Osaka ideal.',
+  hotels:[{id:'n1',n:'Nara Hotel',lab:'Beste Wahl',chf:172,s:'9.0 ★ · Traditionshaus von 1909'},
+          {id:'n2',n:'Nara Backpackers',lab:'Günstigste',chf:52,s:'8.6 ★ · altes Holzhaus'},
+          {id:'n3',n:'Hotel Nikko Nara',lab:'Beste Lage',chf:124,s:'8.7 ★ · direkt am Bahnhof'}]},
+ hiroshima:{n:'Hiroshima',jp:'広島',c:'--l-tozai',ideal:2,min:1,max:3,axis:72,
+  fit:{history:1,food:.8,photo:.7,tradition:.6,nature:.5},
+  intro:'Friedenspark und Miyajima. Schwerer Stoff und eine der schönsten Inseln Japans, beides an einem Tag erreichbar.',
+  hotels:[{id:'hi1',n:'Hotel Granvia Hiroshima',lab:'Beste Wahl',chf:126,s:'8.6 ★ · am Hauptbahnhof'},
+          {id:'hi2',n:'Hostel Roku',lab:'Günstigste',chf:56,s:'8.9 ★ · ruhig, sehr sauber'},
+          {id:'hi3',n:'Sheraton Grand Hiroshima',lab:'Beste Lage',chf:182,s:'9.0 ★ · direkt am Shinkansen'}]},
+ kanazawa:{n:'Kanazawa',jp:'金沢',c:'--l-hanzo',ideal:2,min:1,max:3,axis:52,
+  fit:{tradition:.95,history:.8,food:.85,photo:.8,shopping:.5},
+  intro:'Kyoto ohne die Menschenmassen: einer der schönsten Gärten des Landes, zwei erhaltene Teehaus-Viertel und der beste Fischmarkt der Westküste.',
+  hotels:[{id:'ka1',n:'Hotel Intergate Kanazawa',lab:'Beste Wahl',chf:134,s:'8.9 ★ · nahe Omicho'},
+          {id:'ka2',n:'Hostel Pongyi',lab:'Günstigste',chf:48,s:'9.2 ★ · winzig, familiär'},
+          {id:'ka3',n:'Ryokan Sumiyoshiya',lab:'Traditionell',chf:196,s:'9.1 ★ · Ryokan seit 1830'}]},
+ nikko:{n:'Nikkō',jp:'日光',c:'--l-fukuto',ideal:1,min:1,max:2,axis:38,
+  fit:{tradition:.9,nature:.95,photo:.85,history:.7,onsen:.5},
+  intro:'Schreine im Bergwald, Wasserfälle und ein Kratersee. Der intensivste Naturtag im Umkreis von Tokyo.',
+  hotels:[{id:'ni1',n:'Nikko Station Hotel Classic',lab:'Beste Wahl',chf:98,s:'8.4 ★ · am Bahnhof'},
+          {id:'ni2',n:'Nikkorisou Backpackers',lab:'Günstigste',chf:44,s:'8.8 ★ · altes Holzhaus'},
+          {id:'ni3',n:'Kanaya Hotel',lab:'Traditionell',chf:188,s:'8.9 ★ · ältestes Resorthotel Japans'}]},
+ takayama:{n:'Takayama',jp:'高山',c:'--l-yuraku',ideal:2,min:1,max:2,axis:50,
+  fit:{tradition:.9,food:.8,nature:.7,photo:.75,history:.6,onsen:.5},
+  intro:'Erhaltene Altstadt in den Bergen, Morgenmärkte und Hida-Rind. Von hier ist Shirakawa-go in einer Stunde erreicht.',
+  hotels:[{id:'ta1',n:'Hotel Around Takayama',lab:'Beste Wahl',chf:118,s:'8.8 ★ · modern, ruhig'},
+          {id:'ta2',n:'K’s House Takayama',lab:'Günstigste',chf:46,s:'8.9 ★ · Klassiker unter Reisenden'},
+          {id:'ta3',n:'Honjin Hiranoya',lab:'Traditionell',chf:224,s:'9.2 ★ · Ryokan mit Kaiseki'}]},
+ nagano:{n:'Nagano',jp:'長野',c:'--l-chiyoda',ideal:2,min:1,max:3,axis:30,
+  fit:{nature:1,onsen:.95,tradition:.65,photo:.85,food:.5},
+  intro:'Schneeaffen im heissen Quellwasser, ein 1400 Jahre alter Tempel und die japanischen Alpen vor der Tür.',
+  hotels:[{id:'na1',n:'Hotel Metropolitan Nagano',lab:'Beste Wahl',chf:122,s:'8.7 ★ · am Bahnhof'},
+          {id:'na2',n:'1166 Backpackers',lab:'Günstigste',chf:50,s:'9.1 ★ · nahe Zenkō-ji'},
+          {id:'na3',n:'Ryokan Biyu no Yado',lab:'Onsen',chf:186,s:'9.0 ★ · eigene Quelle'}]},
+ sapporo:{n:'Sapporo',jp:'札幌',c:'--l-tozai',ideal:3,min:2,max:4,axis:0,
+  fit:{food:.95,nature:.9,onsen:.7,nightlife:.65,photo:.6,shopping:.5},
+  intro:'Hokkaido: Meeresfrüchte, Miso-Ramen, Bier und im Winter der zuverlässigste Schnee Japans.',
+  hotels:[{id:'sa1',n:'Cross Hotel Sapporo',lab:'Beste Wahl',chf:132,s:'8.9 ★ · zentral, mit Bad'},
+          {id:'sa2',n:'UNTAPPED HOSTEL',lab:'Günstigste',chf:54,s:'8.8 ★ · Altbau'},
+          {id:'sa3',n:'JR Tower Hotel Nikko',lab:'Beste Lage',chf:186,s:'9.0 ★ · über dem Bahnhof'}]},
+ fukuoka:{n:'Fukuoka',jp:'福岡',c:'--l-ginza',ideal:2,min:1,max:3,axis:82,
+  fit:{food:1,nightlife:.85,shopping:.55,history:.45,tradition:.4},
+  intro:'Die Essensstadt: Tonkotsu-Ramen kommt von hier, und abends stehen überall Yatai-Stände am Fluss.',
+  hotels:[{id:'fu1',n:'The Blossom Hakata Premier',lab:'Beste Wahl',chf:128,s:'9.0 ★ · nahe Hakata'},
+          {id:'fu2',n:'Hostel Toki',lab:'Günstigste',chf:46,s:'8.7 ★ · zentral'},
+          {id:'fu3',n:'Grand Hyatt Fukuoka',lab:'Beste Lage',chf:196,s:'8.9 ★ · an Canal City'}]},
+ nagoya:{n:'Nagoya',jp:'名古屋',c:'--l-hanzo',ideal:2,min:1,max:2,axis:55,
+  fit:{anime:.9,gaming:.6,food:.75,history:.6,shopping:.5},
+  intro:'Für Ghibli-Fans der Pflichtstopp: der Ghibli Park liegt vor der Stadt. Dazu eine Burg und eine eigene Küche.',
+  hotels:[{id:'ng1',n:'Nagoya Kanko Hotel',lab:'Beste Wahl',chf:116,s:'8.6 ★ · zentral'},
+          {id:'ng2',n:'Glocal Nagoya',lab:'Günstigste',chf:44,s:'8.5 ★ · nahe Bahnhof'},
+          {id:'ng3',n:'Nagoya Marriott Associa',lab:'Beste Lage',chf:174,s:'8.9 ★ · über dem Bahnhof'}]},
+ okinawa:{n:'Okinawa',jp:'沖縄',c:'--l-chiyoda',ideal:3,min:2,max:5,axis:100,
+  fit:{nature:1,photo:.8,food:.6,history:.5,nightlife:.4},
+  intro:'Subtropisch, eigene Kultur, eigenes Essen. Passt nicht zu einer Shinkansen-Route — hierher fliegt man.',
+  hotels:[{id:'ok1',n:'Hyatt Regency Naha',lab:'Beste Wahl',chf:142,s:'8.8 ★ · an Kokusai-dori'},
+          {id:'ok2',n:'Guesthouse Kerama',lab:'Günstigste',chf:52,s:'8.5 ★ · einfach, am Meer'},
+          {id:'ok3',n:'Halekulani Okinawa',lab:'Beste Lage',chf:298,s:'9.4 ★ · eigener Strand'}]}
+});
+CITIES.tokyo.axis=42;CITIES.hakone.axis=46;CITIES.kyoto.axis=60;CITIES.osaka.axis=63;
+
+AREAS.push(
+ {id:'nara_a',city:'nara',t:'Nara-Park',tags:['tradition','history','nature','photo'],
+  hint:'Alles im Park zu Fuss, rund 3 km. Die Rehe verbeugen sich für Kekse.',
+  pois:[P('todaiji','Tōdai-ji','東大寺','temple',['tradition','history','photo'],800,70,'walk',0,'Der Buddha ist 15 m hoch — das Foto wird ihm nicht gerecht.'),
+        P('narapark','Rehe im Nara-Park','奈良公園','park',['nature','photo'],0,60,'walk',0,'Kekse gibt es an Ständen; die Rehe kennen den Ablauf besser als du.'),
+        P('kasuga','Kasuga-Taisha','春日大社','shrine',['tradition','photo'],500,50,'walk',0,'3000 Steinlaternen entlang des Wegs.'),
+        P('isuien','Isuien-Garten','依水園','park',['nature','tradition'],1200,45,'walk',0,''),
+        P('nakatanidou','Mochi-Stampfen Nakatanidou','中谷堂','food',['food'],200,15,'walk',1,'Zwei Männer, ein Holzhammer, unfassbares Tempo.')]},
+ {id:'hiro_a',city:'hiroshima',t:'Friedenspark',tags:['history','photo','food'],
+  hint:'Museum und Denkmal brauchen Zeit und gehen nahe. Danach bewusst etwas anderes einplanen.',
+  pois:[P('genbaku','Atombombenkuppel','原爆ドーム','landmark',['history','photo'],0,40,'walk',0,'Steht genau so, wie sie am 6. August 1945 stehen blieb.'),
+        P('peacemuseum','Friedensmuseum','平和記念資料館','museum',['history'],200,110,'walk',0,'Schwer auszuhalten und trotzdem der Grund, herzukommen.'),
+        P('okonomimura','Okonomi-mura','お好み村','food',['food'],1100,60,'walk',1,'Drei Etagen nur Okonomiyaki, Hiroshima-Art mit Nudeln.'),
+        P('shukkeien','Shukkei-en','縮景園','park',['nature','tradition'],260,45,'walk',0,'')]},
+ {id:'miyajima','city':'hiroshima',t:'Miyajima',tags:['tradition','nature','photo','food'],type:'day',
+  hint:'Fähre ab Miyajimaguchi, 10 Minuten. Bei Flut steht das Tor im Wasser — Gezeiten vorher nachschauen.',
+  pois:[P('itsukushima','Itsukushima-Schrein','厳島神社','shrine',['tradition','photo'],300,50,'walk',0,'Auf Stelzen über dem Wasser gebaut.'),
+        P('otorii','Grosses Torii','大鳥居','landmark',['photo','tradition'],0,30,'walk',0,'Das Bild, das jeder von Japan kennt.'),
+        P('misen','Berg Misen','弥山','nature',['nature','photo'],2000,180,'walk',0,'Seilbahn plus 30 Minuten Aufstieg, dann die ganze Seto-Inlandsee.'),
+        P('anagomeshi','Anago-Meshi','あなごめし','food',['food'],2200,45,'walk',0,'Meeraal auf Reis, die Spezialität der Insel.')]},
+ {id:'kana_a',city:'kanazawa',t:'Zentrum',tags:['tradition','history','food','photo'],
+  hint:'Garten, Burg und Teehausviertel liegen in einem Bogen von 2 km.',
+  pois:[P('kenrokuen','Kenroku-en','兼六園','park',['nature','tradition','photo'],320,80,'walk',0,'Einer der drei berühmtesten Gärten Japans.'),
+        P('kanazawajo','Burg Kanazawa','金沢城','castle',['history','photo'],320,60,'walk',0,''),
+        P('higashichaya','Higashi Chaya','東茶屋街','street',['tradition','photo','shopping'],0,60,'walk',0,'Teehausviertel mit Goldblatt-Läden — und Goldblatt-Eis.'),
+        P('omicho','Omicho-Markt','近江町市場','market',['food'],2500,60,'walk',1,'Der beste Fischmarkt der Westküste.'),
+        P('museum21','21st Century Museum','21世紀美術館','museum',['art','photo'],450,90,'rec',0,'Das Pool-Kunstwerk braucht ein Zeitfenster.')]},
+ {id:'nikko_a',city:'nikko',t:'Schreine und Bergsee',tags:['tradition','nature','photo','history'],
+  hint:'Der See liegt 20 Serpentinen über den Schreinen — Bus einplanen.',
+  pois:[P('toshogu','Tōshō-gū','東照宮','shrine',['tradition','history','photo'],1300,90,'walk',0,'Überladen, vergoldet, völlig untypisch für Japan — und deshalb sehenswert.'),
+        P('shinkyo','Shinkyō-Brücke','神橋','landmark',['photo','tradition'],300,20,'walk',0,''),
+        P('kegon','Kegon-Wasserfall','華厳の滝','nature',['nature','photo'],570,50,'walk',0,'97 m, Aufzug führt zur Plattform darunter.'),
+        P('chuzenji','Chūzenji-See','中禅寺湖','nature',['nature','photo'],0,70,'walk',0,'')]},
+ {id:'taka_a',city:'takayama',t:'Altstadt',tags:['tradition','food','history','photo'],
+  hint:'Die Altstadt ist klein — halber Tag reicht, der Rest ist Essen.',
+  pois:[P('sanmachi','Sanmachi-Altstadt','三町','street',['tradition','photo'],0,70,'walk',0,'Holzhäuser aus der Edo-Zeit, teils noch bewohnt.'),
+        P('asaichi','Morgenmarkt','宮川朝市','market',['food','tradition'],0,45,'walk',1,'Ab 7 Uhr am Fluss, gegen Mittag vorbei.'),
+        P('hidanosato','Hida-Freilichtmuseum','飛騨の里','museum',['history','tradition'],700,80,'walk',0,'Strohdachhäuser, wie in Shirakawa-go, nur ohne Busse.'),
+        P('hidagyu','Hida-Rind','飛騨牛','food',['food'],2500,50,'rec',0,'Auf Augenhöhe mit Kobe, halb so bekannt.'),
+        P('sake','Sake-Brauereien','造り酒屋','experience',['food','tradition'],500,45,'walk',0,'Sechs Brauereien in einer Gasse, an der Zedernkugel erkennbar.')]},
+ {id:'naga_a',city:'nagano',t:'Affen und Tempel',tags:['nature','onsen','tradition','photo'],type:'day',
+  hint:'Zu den Affen sind es 30 Minuten Fussweg durch den Wald — feste Schuhe.',
+  pois:[P('jigokudani','Schneeaffen Jigokudani','地獄谷野猿公苑','nature',['nature','photo','onsen'],800,120,'walk',0,'Im Winter sitzen sie im heissen Wasser. Im Sommer sind sie da, aber trocken.'),
+        P('zenkoji','Zenkō-ji','善光寺','temple',['tradition','history'],600,70,'walk',0,'1400 Jahre alt, mit einem stockdunklen Gang unter dem Altar.'),
+        P('shibuonsen','Onsen-Dorf Shibu','渋温泉','experience',['onsen','tradition'],0,90,'walk',1,'Neun öffentliche Bäder, Gäste laufen im Yukata durchs Dorf.'),
+        P('togakushi','Togakushi-Soba','戸隠そば','food',['food'],1300,45,'walk',0,'')]},
+ {id:'sapp_a',city:'sapporo',t:'Sapporo',tags:['food','nightlife','photo','nature'],
+  hint:'Alles rund um Odori und Susukino, mit der U-Bahn zwei Stationen.',
+  pois:[P('nijoichiba','Nijō-Markt','二条市場','market',['food'],2000,50,'walk',1,'Seeigel und Krabbe zum Frühstück.'),
+        P('beermuseum','Sapporo Beer Museum','サッポロビール博物館','museum',['food','history'],0,70,'walk',0,'Eintritt frei, Verkostung kostet — Dschingis-Khan-Grill nebenan.'),
+        P('ramenyokocho','Ramen-Yokochō','ラーメン横丁','food',['food'],1000,45,'walk',1,'Miso-Ramen mit Butter und Mais, die Hokkaido-Art.'),
+        P('susukino','Susukino','すすきの','bar',['nightlife'],0,90,'walk',0,''),
+        P('odori','Odori-Park','大通公園','park',['nature','photo'],0,40,'walk',0,'Im Februar steht hier das Schneefestival.')]},
+ {id:'fuku_a',city:'fukuoka',t:'Hakata',tags:['food','nightlife','tradition'],
+  hint:'Die Yatai-Stände öffnen erst gegen 18 Uhr — Tag entsprechend legen.',
+  pois:[P('yatai','Yatai-Stände am Fluss','屋台','food',['food','nightlife'],2000,80,'walk',1,'Zehn Hocker, ein Koch, kein Menü auf Englisch.'),
+        P('ichiran','Ichiran Hauptsitz','一蘭本社総本店','food',['food'],1000,40,'walk',0,'Hier wurde die Einzelkabine erfunden.'),
+        P('kushida','Kushida-Schrein','櫛田神社','shrine',['tradition'],0,35,'walk',0,''),
+        P('ohori','Ōhori-Park','大濠公園','park',['nature','photo'],0,50,'walk',0,''),
+        P('canalcity','Canal City','キャナルシティ','shopping',['shopping','anime'],0,60,'walk',0,'')]},
+ {id:'nago_a',city:'nagoya',t:'Nagoya',tags:['anime','history','food','shopping'],
+  hint:'Der Ghibli Park liegt ausserhalb — Anfahrt rund 50 Minuten.',
+  pois:[P('ghiblipark','Ghibli Park','ジブリパーク','park',['anime','photo'],3500,300,'req',0,'Tickets werden monatlich im Voraus verlost — früh kümmern.'),
+        P('nagoyajo','Burg Nagoya','名古屋城','castle',['history','photo'],500,80,'walk',0,''),
+        P('osu','Ōsu-Einkaufsstrasse','大須商店街','shopping',['shopping','anime','gaming'],0,70,'walk',0,'Gebrauchtwaren, Elektronik, Anime — Akihabara im Kleinformat.'),
+        P('hitsumabushi','Hitsumabushi','ひつまぶし','food',['food'],4000,60,'rec',0,'Aal auf drei Arten im selben Gericht.'),
+        P('maglev','SCMaglev-Museum','リニア鉄道館','museum',['history'],1000,90,'walk',0,'')]},
+ {id:'oki_a',city:'okinawa',t:'Okinawa',tags:['nature','photo','food','history'],
+  hint:'Ohne Mietwagen wird es zäh — die Sehenswürdigkeiten liegen weit auseinander.',
+  pois:[P('churaumi','Churaumi-Aquarium','美ら海水族館','museum',['nature','photo'],2180,150,'rec',0,'Walhaie in einem der grössten Becken der Welt.'),
+        P('shuri','Burg Shuri','首里城','castle',['history','tradition'],400,90,'walk',0,'Nach dem Brand von 2019 im Wiederaufbau — Teile sind zugänglich.'),
+        P('kokusai','Kokusai-dōri','国際通り','street',['shopping','food'],0,60,'walk',0,''),
+        P('manzamo','Cape Manzamo','万座毛','nature',['nature','photo'],100,40,'walk',0,'Klippe in Elefantenform.'),
+        P('tacorice','Taco Rice','タコライス','food',['food'],800,30,'walk',1,'Amerikanischer Einfluss auf okinawischem Reis.')]}
+);
+
 var CONN={ 'tokyo-hakone':{m:'Odakyu Romancecar',dur:85,chf:14,pass:false},
  'tokyo-kyoto':{m:'Shinkansen Hikari',dur:160,chf:78,pass:true},
  'hakone-kyoto':{m:'Shinkansen ab Odawara',dur:135,chf:71,pass:true},
@@ -703,23 +953,43 @@ function dest(cid){for(var i=0;i<S.trip.dests.length;i++)if(S.trip.dests[i].city
 function hotelOf(d){var hs=CITIES[d.city].hotels;for(var i=0;i<hs.length;i++)if(hs[i].id===d.hotel)return hs[i];return null;}
 function areaEntry(d,aid,create){for(var i=0;i<d.areas.length;i++)if(d.areas[i].id===aid)return d.areas[i];
   if(create){var e={id:aid,items:[]};d.areas.push(e);return e;}return null;}
-function conn(a,b){return CONN[a+'-'+b]||CONN[b+'-'+a]||null;}
+function conn(a,b){
+  var fix=CONN[a+'-'+b]||CONN[b+'-'+a];
+  if(fix)return fix;
+  var A=CITIES[a],B=CITIES[b];if(!A||!B)return null;
+  var d=Math.abs(ax(a)-ax(b));
+  if(a==='okinawa'||b==='okinawa')
+    return {m:'Inlandsflug',dur:150,chf:Math.round(90+d*.9),pass:false,est:true};
+  if(d>60) return {m:'Inlandsflug',dur:Math.round(80+d*.6),chf:Math.round(70+d*.8),pass:false,est:true};
+  return {m:d>28?'Shinkansen':(d>10?'Express':'Regionalzug'),
+          dur:Math.round(22+d*4.4),chf:Math.round(6+d*1.35),pass:true,est:true};
+}
 function cityAreas(cid){return AREAS.filter(function(a){return a.city===cid;});}
 function planCount(d,aid){var e=areaEntry(d,aid,false);return e?e.items.length:0;}
 function inPlan(d,pid){for(var i=0;i<d.areas.length;i++)for(var j=0;j<d.areas[i].items.length;j++)if(d.areas[i].items[j].id===pid)return d.areas[i].items[j];return null;}
 
 /* ============ GENERATOR ============ */
 function score(fit,ints){var s=0;for(var k in ints)s+=(fit[k]||0)*ints[k];return s;}
+function ax(c){var v=CITIES[c]&&CITIES[c].axis;return typeof v==='number'?v:50;}
+function byAxis(a,b){return ax(a)-ax(b);}
+function iLabel(id){for(var i=0;i<INTERESTS.length;i++)if(INTERESTS[i].id===id)return INTERESTS[i].t;return id;}
+function cityWhy(cid,ints){
+  var C=CITIES[cid],out=[];
+  for(var k in ints){var f=C.fit[k]||0;if(f>=.5)out.push({id:k,w:ints[k],f:f,v:f*ints[k]});}
+  out.sort(function(a,b){return b.v-a.v;});return out.slice(0,3);
+}
+function activeInts(){var i=S.brief.interests;return Object.keys(i).length?i:{food:1,tradition:1};}
 function buildTrip(){
   var b=S.brief,ints=b.interests;
   if(!Object.keys(ints).length)ints={food:1,tradition:1};
   var nights=b.days-1;
   var ranked=Object.keys(CITIES).map(function(id){return {id:id,sc:score(CITIES[id].fit,ints)};}).sort(function(x,y){return y.sc-x.sc;});
-  var chosen=['tokyo'],limit=nights>=12?4:nights>=8?3:2;
+  var div=b.pace==='relaxed'?4:b.pace==='packed'?2.6:3.2;
+  var chosen=['tokyo'],limit=Math.max(1,Math.min(6,Math.round(b.days/div)));
   ranked.forEach(function(k){if(k.id!=='tokyo'&&chosen.length<limit)chosen.push(k.id);});
-  var ORDER=['tokyo','hakone','kyoto','osaka'];
-  chosen.sort(function(a,b2){return ORDER.indexOf(a)-ORDER.indexOf(b2);});
-  var dests=chosen.map(function(id){return {city:id,nights:CITIES[id].min,hotel:CITIES[id].hotels[0].id,areas:[]};});
+  chosen.sort(byAxis);
+  var dests=chosen.map(function(id){return {city:id,nights:CITIES[id].min,hotel:CITIES[id].hotels[0].id,
+    areas:[],why:cityWhy(id,ints),score:score(CITIES[id].fit,ints)};});
   var left=nights-dests.reduce(function(s,d){return s+d.nights;},0),guard=0;
   while(left>0&&guard++<60){
     var best=null;
@@ -739,7 +1009,9 @@ function buildTrip(){
       return {id:x.a.id,items:rk.slice(0,per).map(function(r){return {id:r.p.id,locked:false};})};
     });
   });
-  S.trip={dests:dests,flight:b.flights?{sel:true,chf:748}:null};
+  var rejected=ranked.filter(function(k){return chosen.indexOf(k.id)<0;})
+    .map(function(k){return {city:k.id,score:k.sc,why:cityWhy(k.id,ints)};});
+  S.trip={dests:dests,flight:b.flights?{sel:true,chf:748}:null,rejected:rejected};
   S.view='overview';S.area={};
 }
 
@@ -834,7 +1106,12 @@ function renderCity(cid){
     '<div class="chero-body"><div class="jp-vert" aria-hidden="true">'+C.jp+'</div>'+
     '<div style="flex:1;min-width:140px">'+
     '<div class="chero-t">'+esc(C.n)+'</div>'+
-    '<div class="cm">'+d.areas.reduce(function(s,a){return s+a.items.length;},0)+' Orte gesammelt</div></div>'+
+    '<div class="cm">'+d.areas.reduce(function(s,a){return s+a.items.length;},0)+' Orte gesammelt</div>'+
+    (d.why&&d.why.length?'<button class="whyline" data-act="why" data-c="'+cid+'">'+
+      '<span class="whydot"></span>Vorgeschlagen wegen '+
+      d.why.map(function(w){return esc(iLabel(w.id));}).join(' · ')+
+      ' <span class="whymore">Warum?</span></button>':'')+
+    '</div>'+
     '<div class="nightctl"><button data-act="night" data-c="'+cid+'" data-n="-1" aria-label="Weniger Nächte">−</button>'+
     '<span>'+d.nights+' '+(d.nights===1?'Nacht':'Nächte')+'</span>'+
     '<button data-act="night" data-c="'+cid+'" data-n="1" aria-label="Mehr Nächte">+</button></div>'+
@@ -895,9 +1172,7 @@ function renderCity(cid){
 
 /* ============ ONBOARDING ============ */
 var QUESTIONS=[
- {k:'days',h:'Wie lange bist du unterwegs?',s:'Inklusive An- und Abreise.',type:'opt',
-  opts:[{v:7,t:'7 Tage',d:'Zwei Städte, entspannt'},{v:10,t:'10 Tage',d:'Der häufigste Zuschnitt'},
-        {v:14,t:'14 Tage',d:'Drei bis vier Städte ohne Hetze'},{v:21,t:'21 Tage',d:'Auch die Regionen abseits'}]},
+ {k:'days',h:'Wie lange bist du unterwegs?',s:'Inklusive An- und Abreise. Zwischen 3 und 45 Tagen, ganz wie du willst.',type:'days'},
  {k:'interests',h:'Was interessiert dich?',s:'Mehrfach möglich. Zweimal tippen = „das ist mein Hauptgrund“.',type:'chips'},
  {k:'pace',h:'Wie schnell willst du reisen?',s:'Bestimmt, wie viel pro Tag im Plan landet.',type:'opt',
   opts:[{v:'relaxed',t:'Entspannt',d:'3 Dinge am Tag, viel Café'},{v:'normal',t:'Normal',d:'5 Dinge am Tag'},
@@ -922,6 +1197,15 @@ function renderQ(){
   else if(q.type==='slider')h+='<div><div class="slider-val" id="bud-val">'+chf(S.brief.budget)+'</div>'+
     '<input type="range" id="bud" min="1200" max="9000" step="100" value="'+S.brief.budget+'" style="margin:12px 0">'+
     '<div class="calib" id="bud-cal"></div></div>';
+  else if(q.type==='days')h+='<div class="dayctl">'+
+    '<button class="daybtn" data-day="-1" aria-label="Ein Tag weniger">−</button>'+
+    '<input type="number" id="dayin" min="3" max="45" step="1" value="'+S.brief.days+'" aria-label="Anzahl Tage">'+
+    '<span class="dayunit">Tage</span>'+
+    '<button class="daybtn" data-day="1" aria-label="Ein Tag mehr">+</button></div>'+
+    '<input type="range" id="dayrange" min="3" max="45" step="1" value="'+S.brief.days+'" aria-label="Anzahl Tage">'+
+    '<div class="daychips">'+[5,7,10,14,18,21,28].map(function(v){
+      return '<button class="daychip" data-dayset="'+v+'" aria-pressed="'+(S.brief.days===v)+'">'+v+'</button>';}).join('')+
+    '</div><div class="calib" id="day-cal"></div>';
   else if(q.type==='multi')h+='<div class="opts">'+q.opts.map(function(o){
     return '<button class="opt" data-multi="'+o.v+'" aria-pressed="'+(!!S.brief[o.v])+'">'+
       '<span class="opt-t">'+esc(o.t)+'</span><span class="opt-d">'+esc(o.d)+'</span></button>';}).join('')+'</div>';
@@ -929,7 +1213,21 @@ function renderQ(){
      '<button class="btn btn-primary" id="ob-next">'+(S.qi===QUESTIONS.length-1?'Trip generieren':'Weiter')+'</button></div>';
   c.innerHTML=h;
   if(q.type==='slider')calib();
+  if(q.type==='days')dayCal();
 }
+function dayCal(){
+  var d=S.brief.days,n=Math.max(1,Math.min(6,Math.round(d/(S.brief.pace==='relaxed'?4:S.brief.pace==='packed'?2.6:3.2))));
+  var t;
+  if(d<=4)t=d+' Tage reichen für eine Stadt. Tokyo oder Kyoto, ohne Umsteigen.';
+  else if(d<=8)t=d+' Tage: zwei Städte in Ruhe, oder drei mit wenig Puffer.';
+  else if(d<=15)t=d+' Tage: der übliche Zuschnitt. Drei bis vier Städte ohne Hetze.';
+  else if(d<=24)t=d+' Tage: Zeit für die Regionen abseits — Kanazawa, Takayama, Hiroshima.';
+  else t=d+' Tage: reicht bis Hokkaido oder Okinawa. Achte auf 90 Tage visumfrei.';
+  var e=$('#day-cal');if(e)e.innerHTML=esc(t)+'<br><span style="color:var(--ink-3)">Vorschlag: rund '+n+' '+(n===1?'Stadt':'Städte')+'.</span>';
+  var i=$('#dayin'),r=$('#dayrange');if(i)i.value=d;if(r)r.value=d;
+  $$('.daychip').forEach(function(c){c.setAttribute('aria-pressed',+c.getAttribute('data-dayset')===d);});
+}
+function setDays(v){S.brief.days=Math.max(3,Math.min(45,Math.round(v)||3));dayCal();}
 function calib(){
   var per=S.brief.budget/S.brief.days,d=S.brief.days,t;
   if(per<110)t='Knapp für '+d+' Tage: Hostels und Business-Hotels, wenig Intercity-Transport.';
@@ -1002,6 +1300,33 @@ function openAddDest(){
     '<div class="ob-foot" style="margin-top:16px"><button class="linkish" data-close="modal">Abbrechen</button><span></span></div>');
 }
 
+function openWhy(cid){
+  var d=dest(cid),C=CITIES[cid],ints=activeInts();
+  var h='<h3>Warum '+esc(C.n)+'?</h3><p>'+esc(C.intro)+'</p>';
+  h+='<div class="whygrid">';
+  (d.why||[]).forEach(function(w){
+    h+='<div class="whyrow"><span class="whyname">'+esc(iLabel(w.id))+(w.w>1?' <b>★</b>':'')+'</span>'+
+       '<span class="whybar"><i style="width:'+Math.round(w.f*100)+'%"></i></span>'+
+       '<span class="whyval num">'+Math.round(w.f*100)+'%</span></div>';
+  });
+  h+='</div>';
+  h+='<p class="whyfoot">Passung aus deinen Interessen und dem Profil der Stadt. '+
+     'Dazu kommen Reisezeit und Budget — deshalb steht die bestbewertete Stadt nicht immer im Plan.</p>';
+  var alts=(S.trip.rejected||[]).slice(0,4);
+  if(alts.length){
+    h+='<h4 class="whyh">Stattdessen möglich</h4><div class="opts">';
+    alts.forEach(function(a){
+      var A=CITIES[a.city];
+      h+='<button class="opt" data-act="swap-city" data-c="'+cid+'" data-to="'+a.city+'">'+
+        '<span class="opt-t">'+esc(A.n)+' <small style="font-family:var(--jp);color:var(--ink-3)">'+A.jp+'</small></span>'+
+        '<span class="opt-d">'+(a.why.length?'Passt zu '+a.why.map(function(w){return esc(iLabel(w.id));}).join(', '):'Andere Ausrichtung')+
+        ' · '+A.ideal+' Nächte empfohlen</span></button>';
+    });
+    h+='</div>';
+  }
+  openModal(h);
+}
+
 /* ============ TOAST ============ */
 function toast(msg,undoFn){
   var w=$('#toasts'),el=document.createElement('div');
@@ -1065,6 +1390,24 @@ document.addEventListener('click',function(e){
     var d4=dest(cid),n=+t.getAttribute('data-n');
     if(d4.nights+n<1){toast('Mindestens eine Nacht.');return;}
     d4.nights+=n;S.brief.days+=n;renderApp();}
+  else if(a==='why')openWhy(cid);
+  else if(a==='swap-city'){
+    var to=t.getAttribute('data-to'),d7=dest(cid),ints=activeInts();
+    var nights=d7.nights,idx=S.trip.dests.indexOf(d7),C2=CITIES[to];
+    var per=S.brief.pace==='relaxed'?3:S.brief.pace==='packed'?6:5;
+    var pool=cityAreas(to).map(function(A){var sc=0;A.tags.forEach(function(tg){sc+=(ints[tg]||0);});return {A:A,sc:sc};})
+      .sort(function(x,y){return y.sc-x.sc;});
+    var nd2={city:to,nights:Math.max(C2.min,Math.min(C2.max,nights)),hotel:C2.hotels[0].id,
+      why:cityWhy(to,ints),score:score(C2.fit,ints),
+      areas:pool.slice(0,Math.max(1,Math.min(pool.length,nights))).map(function(x){
+        return {id:x.A.id,items:x.A.pois.slice(0,per).map(function(pp){return {id:pp.id,locked:false};})};})};
+    S.trip.dests[idx]=nd2;
+    S.trip.dests.sort(function(x,y){return byAxis(x.city,y.city);});
+    S.trip.rejected=(S.trip.rejected||[]).filter(function(r){return r.city!==to;});
+    S.trip.rejected.unshift({city:cid,score:d7.score||0,why:d7.why||cityWhy(cid,ints)});
+    $('#modal').classList.remove('open');S.view=to;S.area={};renderApp();
+    toast(CITIES[cid].n+' → '+C2.n+' getauscht.');
+  }
   else if(a==='dest-rm')openDestRemove(cid);
   else if(a==='do-dest-rm'){
     var mode=t.getAttribute('data-mode'),d5=dest(cid),free=d5.nights;
@@ -1080,8 +1423,7 @@ document.addEventListener('click',function(e){
     var pool=cityAreas(cid).slice(0,Math.max(1,Math.min(3,C.ideal)));
     nd.areas=pool.map(function(x){return {id:x.id,items:x.pois.slice(0,S.brief.pace==='relaxed'?3:5)
       .map(function(p){return {id:p.id,locked:false};})};});
-    var ORDER=['tokyo','hakone','kyoto','osaka'];
-    S.trip.dests.push(nd);S.trip.dests.sort(function(x,y){return ORDER.indexOf(x.city)-ORDER.indexOf(y.city);});
+    S.trip.dests.push(nd);S.trip.dests.sort(function(x,y){return byAxis(x.city,y.city);});
     S.brief.days+=C.ideal;$('#modal').classList.remove('open');S.view=cid;renderApp();
     toast(C.n+' hinzugefügt · '+C.ideal+' '+(C.ideal===1?'Nacht':'Nächte')+'.');}
   else if(a==='cheaper'){
@@ -1106,6 +1448,10 @@ document.addEventListener('click',function(e){
   if(i){var id=i.getAttribute('data-int'),w=S.brief.interests[id]||0;
     if(w===0)S.brief.interests[id]=1;else if(w===1)S.brief.interests[id]=2;else delete S.brief.interests[id];
     renderQ();return;}
+  var dq=e.target.closest('[data-day]');
+  if(dq){setDays(S.brief.days+ +dq.getAttribute('data-day'));return;}
+  var ds=e.target.closest('[data-dayset]');
+  if(ds){setDays(+ds.getAttribute('data-dayset'));return;}
   var m=e.target.closest('[data-multi]');
   if(m){var kk=m.getAttribute('data-multi');S.brief[kk]=!S.brief[kk];renderQ();return;}
   if(e.target.id==='ob-next'){if(S.qi<QUESTIONS.length-1){S.qi++;renderQ();}else startGen();return;}
@@ -1113,6 +1459,7 @@ document.addEventListener('click',function(e){
 });
 document.addEventListener('input',function(e){
   if(e.target.id==='bud'){S.brief.budget=+e.target.value;$('#bud-val').textContent=chf(S.brief.budget);calib();}
+  if(e.target.id==='dayin'||e.target.id==='dayrange')setDays(+e.target.value);
 });
 window.addEventListener('resize',function(){clearTimeout(window.__rp);window.__rp=setTimeout(paintAll,180);});
 
@@ -1134,7 +1481,7 @@ function bgArt(){
   var cv=$('#bg-art');if(!cv)return;
   var dark=getComputedStyle(document.body).backgroundColor;
   var isDark=(function(){var m=dark.match(/\d+/g);return m&&(+m[0]+ +m[1]+ +m[2])/3<110;})();
-  var d=window.devicePixelRatio||1,w=innerWidth,h=innerHeight;
+  var d=window.devicePixelRatio||1,w=innerWidth,h=Math.min(640,innerHeight);
   cv.width=w*d;cv.height=h*d;var c=cv.getContext('2d');c.scale(d,d);
   c.clearRect(0,0,w,h);
   var r=rng('meguri-hero');
@@ -1144,23 +1491,42 @@ function bgArt(){
     g.addColorStop(0,'rgba(221,43,28,'+o[3]+')');g.addColorStop(1,'rgba(221,43,28,0)');
     c.fillStyle=g;c.fillRect(0,0,w,h);});
   // Torii als grosse, ruhige Kontur am unteren Rand
-  var tw=Math.min(w*.52,660),th=h*.60;
-  c.save();c.globalAlpha=isDark?.13:.085;
-  c.translate((w-tw)/2,h*.30);
-  MOT.torii(c,tw,th,r,'#DD2B1C');
-  c.restore();
   // feines Punktraster
   c.globalAlpha=isDark?.05:.035;c.fillStyle=isDark?'#fff':'#171214';
   for(var x=24;x<w;x+=26)for(var y=24;y<h;y+=26)c.fillRect(x,y,1,1);
   c.globalAlpha=1;
 }
-$('#go-plan').onclick=function(){S.qi=0;show('s-ob');renderQ();};
-$('#go-build').onclick=function(){
+function startPlan(){S.qi=0;show('s-ob');renderQ();}
+function startBuild(){
   S.brief.interests={food:1,tradition:1};S.brief.days=10;buildTrip();
-  S.trip.dests=[{city:'tokyo',nights:4,hotel:'h1',areas:[]}];
+  S.trip.dests=[{city:'tokyo',nights:4,hotel:'h1',areas:[],why:cityWhy('tokyo',{food:1,tradition:1}),score:0}];
   S.view='tokyo';S.mode='all';show('s-app');renderApp();
   toast('Leerer Trip — tippe an, was du sehen willst.');
-};
+}
+function startTemplate(){
+  S.brief.interests={anime:2,tcg:1,food:1};S.brief.days=12;S.brief.pace='normal';
+  S.brief.classics='some';S.brief.budget=3200;
+  startGen();
+}
+document.addEventListener('click',function(e){
+  var g=e.target.closest('[data-go]');if(!g)return;
+  var v=g.getAttribute('data-go');
+  if(v==='plan')startPlan();else if(v==='build')startBuild();else startTemplate();
+});
+function fillLanding(){
+  var cities=Object.keys(CITIES).length,areas=AREAS.length,pois=0,req=0;
+  AREAS.forEach(function(a){pois+=a.pois.length;a.pois.forEach(function(p){if(p.res!=='walk')req++;});});
+  var st=$('#lstats');
+  if(st)st.innerHTML=[[cities,'Städte','von Hokkaido bis Okinawa'],
+                      [pois,'Orte','kuratiert, mit Begründung'],
+                      [areas,'Gegenden','geografisch gebündelt'],
+                      [req,'mit Reservierung','Fristen im Blick behalten']]
+    .map(function(r){return '<div class="stat"><span class="stat-n num">'+r[0]+'</span>'+
+      '<span class="stat-t">'+r[1]+'</span><span class="stat-d">'+r[2]+'</span></div>';}).join('');
+  var lc=$('#lchips');
+  if(lc)lc.innerHTML=INTERESTS.map(function(i){return '<span class="chip" data-go="plan">'+esc(i.t)+'</span>';}).join('');
+}
+fillLanding();
 $('#restart').onclick=function(){show('s-landing');bgArt();};
 $('#home-btn').onclick=function(){S.view='overview';renderApp();window.scrollTo(0,0);};
 $('#bstrip').onclick=openBudget;
