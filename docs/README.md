@@ -32,6 +32,7 @@ Datenbank — detailliert genug, um sie direkt als Bauplan an eine Umsetzung
 | 17 | [Monetarisierung](17-monetarisierung.md) | Alle Erlöskanäle mit Richtwerten, Berührungspunkte im Produkt, Nicht-Affiliate-Quellen |
 | 18 | [Bildquellen](18-bildquellen.md) | Woher echte Fotos legal kommen, Quelle je Kategorie, Rechtslage, Vorgehen für Phase 1 |
 | 19 | [Affiliate-Anmeldung](19-affiliate-anmeldung.md) | Netzwerk vs. Direktprogramm, Voraussetzungen, empfohlene Reihenfolge, Bilddaten beim Antrag |
+| 20 | [App oder Webseite](20-app-oder-web.md) | Warum Web zuerst, was die App am Geld ändert, PWA als Zwischenstufe, Entscheidungsschwellen |
 
 ## Prototyp
 
