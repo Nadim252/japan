@@ -2,7 +2,15 @@
 <html lang="de">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#DD2B1C">
+<meta name="description" content="Plane deine Japanreise: Route, Gegenden, Orte sammeln, Budget im Blick.">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icon-192.png">
+<link rel="apple-touch-icon" href="icon-192.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Meguri">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
 <title>Meguri Trip Builder</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -339,6 +347,7 @@ body.money .has-mk{outline:1.5px dashed var(--money);outline-offset:3px}
       <button class="btn btn-primary" id="go-plan">✨ Plan für mich erstellen</button>
       <button class="btn btn-ghost" id="go-build">🧩 Selber bauen</button>
     </div>
+    <button class="btn btn-ghost btn-sm" id="install-btn-2" hidden>＋ Zum Startbildschirm hinzufügen</button>
     <p class="note">Klickbarer Prototyp. Die Orte sind echt, <b>Preise und Öffnungszeiten sind Beispieldaten</b>. Die Bilder sind erzeugte Platzhalter — später stehen dort Fotos.</p>
   </div></div>
 </section>
@@ -360,6 +369,7 @@ body.money .has-mk{outline:1.5px dashed var(--money);outline-offset:3px}
         <div class="bar-id"><div class="bar-t" id="t-title">Japan</div><div class="bar-s" id="t-meta"></div></div>
         <div class="spacer"></div>
         <div class="tools">
+          <button class="btn btn-ghost btn-sm" id="install-btn" hidden>＋ Startbildschirm</button>
           <button class="tgl" id="money-tgl" aria-pressed="false"><span class="sw"></span>Erlöse</button>
           <button class="icobtn" id="theme-btn2" aria-label="Hell / Dunkel">◐</button>
           <button class="icobtn" id="restart" aria-label="Neu starten">↺</button>
@@ -1167,6 +1177,36 @@ function theme(){var r=document.documentElement,cur=r.getAttribute('data-theme')
   r.setAttribute('data-theme',dark?'light':'dark');requestAnimationFrame(function(){paintAll();bgArt();});}
 $('#theme-btn').onclick=theme;$('#theme-btn2').onclick=theme;
 bgArt();window.addEventListener('resize',function(){clearTimeout(window.__bg);window.__bg=setTimeout(bgArt,200);});
+
+/* ============ PWA ============
+   Greift nur, wo ein Manifest verlinkt ist — im Artifact bleibt alles inaktiv. */
+var hasManifest=!!document.querySelector('link[rel="manifest"]');
+if(hasManifest&&'serviceWorker' in navigator){
+  window.addEventListener('load',function(){
+    navigator.serviceWorker.register('sw.js').then(function(r){
+      window.__swReady=true;
+    }).catch(function(){/* ohne Service Worker laeuft die Seite normal weiter */});
+  });
+}
+var installEvt=null;
+function showInstall(on){
+  ['#install-btn','#install-btn-2'].forEach(function(sel){var b=$(sel);if(b)b.hidden=!on;});
+}
+window.addEventListener('beforeinstallprompt',function(e){
+  e.preventDefault();installEvt=e;showInstall(true);
+});
+window.addEventListener('appinstalled',function(){
+  installEvt=null;showInstall(false);toast('Meguri liegt jetzt auf deinem Startbildschirm.');
+});
+document.addEventListener('click',function(e){
+  if(!e.target.closest('#install-btn')&&!e.target.closest('#install-btn-2'))return;
+  if(!installEvt)return;
+  installEvt.prompt();
+  installEvt.userChoice.then(function(c){
+    if(c&&c.outcome==='accepted')showInstall(false);
+    installEvt=null;
+  });
+});
 })();
 </script>
 

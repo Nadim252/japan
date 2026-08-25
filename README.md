@@ -31,6 +31,30 @@ markiert, an denen die Seite Geld verdient.
 Gestaltung: weisse Oberfläche, rote Akzente, Karten mit Bild oben und Text
 darunter. Dunkles Thema als Umkehrung vorhanden.
 
+### Als App auf dem Startbildschirm (PWA)
+
+Der Prototyp ist eine installierbare Web-App. Über einen beliebigen
+HTTPS-Server ausgeliefert, lässt er sich auf dem Handy zum Startbildschirm
+hinzufügen, startet im Vollbild ohne Browserleiste und **funktioniert offline**.
+
+Dazu gehören `manifest.webmanifest`, `sw.js` und die drei Symboldateien im
+selben Ordner. Lokal ausprobieren:
+
+```bash
+cd prototype && python3 -m http.server 8000
+# dann http://localhost:8000 öffnen — localhost gilt als sichere Herkunft
+```
+
+Der Service Worker legt die App-Hülle im Zwischenspeicher ab: Seitenaufrufe
+gehen zuerst ans Netz und fallen bei Ausfall auf die gespeicherte Fassung
+zurück, alles andere kommt zuerst aus dem Zwischenspeicher.
+
+Geprüft: Registrierung und Aktivierung, gültiges Manifest, alle Symbole,
+vollständiger Ablauf bei getrennter Verbindung.
+
+Ohne verlinktes Manifest — etwa wenn die Datei einzeln geöffnet wird — bleibt
+die PWA-Schicht vollständig inaktiv, und der Installationsknopf erscheint nicht.
+
 ### Fotos einsetzen
 
 Der Prototyp zeigt echte Fotos, sobald welche hinterlegt sind, und zeichnet nur
