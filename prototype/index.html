@@ -1224,18 +1224,24 @@ function hotelArea(d){
   if(ho&&HAREA[ho.id])return HAREA[ho.id];
   return (d.areas[0]&&d.areas[0].id)||(cityAreas(d.city)[0]||{}).id;
 }
-/* Entfernung von der Unterkunft — zum einzelnen Ort, sonst zum Viertel */
+/* Entfernung von der Unterkunft — zum einzelnen Ort, sonst zum Viertel.
+   Beide Wege werden gerechnet und der schnellere gewinnt. Bis 18 Minuten
+   bleibt es beim Fussweg: fuer eine Viertelstunde steigt in Japan niemand
+   in die Bahn, auch wenn die Rechnung es knapp hergaebe. */
 function fromHotel(d,areaId,poiId){
   if(!S.brief.hotels)return null;
   var ha=hotelArea(d);if(!ha)return null;
   var A=AGEO[ha];if(!A)return null;
   var B=(poiId&&PGEO[poiId])||AGEO[areaId];if(!B)return null;
   var km=kmBetween(A,B);
-  var w=Math.round(km*13);                       // Fussweg mit Umwegfaktor
-  if(km<=1.5)return {mode:'walk',min:Math.max(2,w),km:km};
-  var t=Math.max(6,Math.round(8+km*2.0));        // Weg zur Station, Wartezeit, Fahrt
-  return {mode:'ride',min:t,km:km,how:TRANSIT[d.city]||'Bahn'};
+  var walk=Math.max(2,Math.round(km*13));          // rund 4,6 km/h mit Umwegen
+  var ride=Math.max(6,Math.round(8+km*2.0));       // Weg zur Station, Warten, Fahrt
+  var how=TRANSIT[d.city]||'Bahn';
+  if(walk<=18||ride>=walk)
+    return {mode:'walk',min:walk,km:km,walk:walk,ride:ride,how:how};
+  return {mode:'ride',min:ride,km:km,walk:walk,ride:ride,how:how};
 }
+
 /* Fuer eine ganze Gegend: Mittel ueber ihre Orte statt Mittelpunkt zu Mittelpunkt */
 function fromHotelArea(d,a){
   if(!S.brief.hotels||!a)return null;
@@ -1250,11 +1256,14 @@ function distLabel(x,short){
   if(!x)return '';
   var k=x.mode==='walk'?'walk':(x.how==='Tram'?'tram':x.how==='Bus'?'bus':'metro');
   var cls=x.mode==='walk'?'dist':'dist ride';
+  var alt=x.avg?'Durchschnitt über die Orte dieser Gegend'
+    :(x.mode==='ride'?'Zu Fuss wären es ca. '+x.walk+' Min'
+                     :'Mit der '+x.how+' ca. '+x.ride+' Min — lohnt sich nicht');
   if(short)  /* auf der Ortskarte: Piktogramm sagt das Verkehrsmittel */
-    return '<span class="'+cls+'" title="Weg von der Unterkunft">'+ICON[k]+'ca. '+x.min+' Min ab Hotel</span>';
-  if(x.mode==='walk')return '<span class="dist">'+ICON.walk+
-    (x.same?'im Viertel · ':'')+'ca. '+x.min+' Min zu Fuss</span>';
-  return '<span class="dist ride">'+ICON[k]+'ca. '+x.min+' Min · '+esc(x.how)+'</span>';
+    return '<span class="'+cls+'" title="'+esc(alt)+'">'+ICON[k]+'ca. '+x.min+' Min ab Hotel</span>';
+  if(x.mode==='walk')return '<span class="dist" title="'+esc(alt)+'">'+ICON.walk+
+    'ca. '+x.min+' Min zu Fuss</span>';
+  return '<span class="dist ride" title="'+esc(alt)+'">'+ICON[k]+'ca. '+x.min+' Min · '+esc(x.how)+'</span>';
 }
 
 /* ============ STATE ============ */
