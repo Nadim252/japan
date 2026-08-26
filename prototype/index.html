@@ -1108,6 +1108,60 @@ var AGEO={
  naga_a:[36.649,138.188], sapp_a:[43.062,141.354], fuku_a:[33.590,130.401],
  nago_a:[35.170,136.885], oki_a:[26.213,127.679]};
 
+
+/* Koordinaten je Ort. Bei bekannten Zielen recherchiert, bei Laeden auf
+   Viertelebene. Wie Preise und Oeffnungszeiten Beispieldaten — die Rechnung
+   dahinter ist echt, die Werte sind vor einem Live-Einsatz zu pruefen. */
+var PGEO={
+ meiji:[35.6764,139.6993], sky:[35.6580,139.7016], takeshita:[35.6716,139.7050],
+ mandarake_sh:[35.6620,139.6980], nagi:[35.6605,139.6995], nintendo:[35.6620,139.6982],
+ gyozaro:[35.6690,139.7060], yoyogi:[35.6712,139.6949], catstreet:[35.6680,139.7050],
+ towerrec:[35.6620,139.6990],
+ mugiwara:[35.7000,139.7710], yellowsub:[35.7005,139.7715], potato:[35.6995,139.7710],
+ mandarake_cx:[35.7020,139.7715], kikanbo:[35.6975,139.7715], gigo:[35.6990,139.7720],
+ radiokaikan:[35.6985,139.7705], animate_ak:[35.7020,139.7710], athome:[35.7000,139.7716],
+ sensoji:[35.7148,139.7967], nakamise:[35.7130,139.7965], ameyoko:[35.7095,139.7745],
+ tnm:[35.7188,139.7757], kappabashi:[35.7130,139.7890], uenopark:[35.7150,139.7740],
+ omoide:[35.6935,139.6995], tocho:[35.6896,139.6917], goldengai:[35.6940,139.7045],
+ gyoen:[35.6852,139.7100], isetan:[35.6917,139.7043],
+ teamlab:[35.6497,139.7900], toyosumkt:[35.6450,139.7860], unicorn:[35.6250,139.7754],
+ broadway:[35.7080,139.6660], tacoche:[35.7080,139.6662], ghibli:[35.6962,139.5704],
+ openair:[35.2447,139.0530], owakudani:[35.2440,139.0200], ashi:[35.2050,139.0250],
+ hakonejinja:[35.2049,139.0257], kaiseki:[35.2320,139.0260],
+ kiyomizu:[34.9949,135.7850], sannenzaka:[34.9962,135.7822], yasaka:[35.0036,135.7785],
+ gion:[35.0037,135.7752], kodaiji:[34.9998,135.7810],
+ bamboo:[35.0170,135.6716], tenryuji:[35.0160,135.6737], monkey:[35.0110,135.6780],
+ togetsu:[35.0130,135.6780],
+ nishiki:[35.0050,135.7649], kinkakuji:[35.0394,135.7292], nijo:[35.0142,135.7481],
+ mangamuseum:[35.0110,135.7590], pokecen_kyoto:[35.0000,135.7690],
+ inari:[34.9671,135.7727], gekkeikan:[34.9320,135.7600],
+ dotonbori:[34.6687,135.5013], kuromon:[34.6650,135.5060], takoyaki:[34.6680,135.5010],
+ hozenji:[34.6680,135.5030], foodtour:[34.6660,135.5020],
+ dendentown:[34.6600,135.5060], jungle:[34.6605,135.5058], cardosaka:[34.6595,135.5062],
+ castle:[34.6873,135.5262], umeda:[34.7052,135.4897], usj:[34.6654,135.4323],
+ todaiji:[34.6889,135.8398], narapark:[34.6851,135.8430], kasuga:[34.6815,135.8484],
+ isuien:[34.6870,135.8360], nakatanidou:[34.6840,135.8290],
+ genbaku:[34.3955,132.4536], peacemuseum:[34.3915,132.4520], okonomimura:[34.3930,132.4610],
+ shukkeien:[34.3980,132.4650],
+ itsukushima:[34.2960,132.3197], otorii:[34.2960,132.3170], misen:[34.2790,132.3190],
+ anagomeshi:[34.2975,132.3220],
+ kenrokuen:[36.5620,136.6626], kanazawajo:[36.5650,136.6590], higashichaya:[36.5720,136.6660],
+ omicho:[36.5710,136.6560], museum21:[36.5600,136.6580],
+ toshogu:[36.7580,139.5990], shinkyo:[36.7530,139.5990], kegon:[36.7390,139.5030],
+ chuzenji:[36.7300,139.4800],
+ sanmachi:[36.1400,137.2600], asaichi:[36.1420,137.2570], hidanosato:[36.1330,137.2400],
+ hidagyu:[36.1400,137.2592], sake:[36.1398,137.2604],
+ jigokudani:[36.7330,138.4620], zenkoji:[36.6620,138.1870], shibuonsen:[36.7370,138.4400],
+ togakushi:[36.7580,138.0700],
+ nijoichiba:[43.0570,141.3560], beermuseum:[43.0710,141.3690], ramenyokocho:[43.0560,141.3540],
+ susukino:[43.0550,141.3530], odori:[43.0605,141.3470],
+ yatai:[33.5900,130.4020], ichiran:[33.5900,130.4100], kushida:[33.5930,130.4110],
+ ohori:[33.5860,130.3800], canalcity:[33.5900,130.4112],
+ ghiblipark:[35.2320,137.0790], nagoyajo:[35.1856,136.8997], osu:[35.1590,136.8990],
+ hitsumabushi:[35.1700,136.8850], maglev:[35.0500,136.8500],
+ churaumi:[26.6940,127.8780], shuri:[26.2170,127.7190], kokusai:[26.2140,127.6870],
+ manzamo:[26.5050,127.8500], tacorice:[26.2140,127.6882]};
+
 /* In welchem Viertel liegt welche Unterkunft */
 var HAREA={h1:'shinjuku',h2:'shinjuku',h3:'shinjuku',h4:'asakusa',
  h5:'hakone_a',h6:'hakone_a',h7:'hakone_a',
@@ -1170,17 +1224,27 @@ function hotelArea(d){
   if(ho&&HAREA[ho.id])return HAREA[ho.id];
   return (d.areas[0]&&d.areas[0].id)||(cityAreas(d.city)[0]||{}).id;
 }
-/* Entfernung von der gewaehlten Unterkunft zu einem Viertel */
-function fromHotel(d,areaId){
+/* Entfernung von der Unterkunft — zum einzelnen Ort, sonst zum Viertel */
+function fromHotel(d,areaId,poiId){
   if(!S.brief.hotels)return null;
   var ha=hotelArea(d);if(!ha)return null;
-  if(ha===areaId)return {mode:'walk',min:9,same:true};
-  var A=AGEO[ha],B=AGEO[areaId];if(!A||!B)return null;
+  var A=AGEO[ha];if(!A)return null;
+  var B=(poiId&&PGEO[poiId])||AGEO[areaId];if(!B)return null;
   var km=kmBetween(A,B);
   var w=Math.round(km*13);                       // Fussweg mit Umwegfaktor
-  if(w<=20)return {mode:'walk',min:Math.max(3,w),km:km};
+  if(km<=1.5)return {mode:'walk',min:Math.max(2,w),km:km};
   var t=Math.max(6,Math.round(8+km*2.0));        // Weg zur Station, Wartezeit, Fahrt
   return {mode:'ride',min:t,km:km,how:TRANSIT[d.city]||'Bahn'};
+}
+/* Fuer eine ganze Gegend: Mittel ueber ihre Orte statt Mittelpunkt zu Mittelpunkt */
+function fromHotelArea(d,a){
+  if(!S.brief.hotels||!a)return null;
+  var vals=a.pois.map(function(pp){return fromHotel(d,a.id,pp.id);}).filter(Boolean);
+  if(!vals.length)return fromHotel(d,a.id);
+  var avg=Math.round(vals.reduce(function(t,v){return t+v.min;},0)/vals.length);
+  var rides=0;vals.forEach(function(v){if(v.mode==='ride')rides++;});
+  return {mode:rides>vals.length/2?'ride':'walk',min:Math.max(2,avg),
+          how:TRANSIT[d.city]||'Bahn',avg:true};
 }
 function distLabel(x,short){
   if(!x)return '';
@@ -1516,7 +1580,7 @@ function renderCity(cid){
       return '<button class="achip" data-act="area" data-c="'+cid+'" data-a="'+a.id+'" aria-selected="'+(sel===a.id)+'">'+
         '<b aria-hidden="true">'+jnum(i)+'</b>'+
         esc(a.t)+' <small>'+n+'/'+a.pois.length+'</small>'+
-        (function(){var x=fromHotel(d,a.id);return x?'<span class="achip-d">'+x.min+'′</span>':'';})()+
+        (function(){var x=fromHotelArea(d,a);return x?'<span class="achip-d">'+x.min+'′</span>':'';})()+
         '</button>';}).join('')+'</div>';
   var scope=sel==='__all'?all:all.filter(function(a){return a.id===sel;});
   var cards=[],onCount=0,offCount=0;
@@ -1534,7 +1598,7 @@ function renderCity(cid){
   });
   h+='<div class="gridnote">'+
      '<span class="gn-on"><b>'+onCount+'</b> gestempelt</span>'+
-     (sel!=='__all'?(function(){var x=fromHotel(d,sel);return x?distLabel(x)+'<span class="gn-hint">ab '+
+     (sel!=='__all'?(function(){var x=fromHotelArea(d,area(sel));return x?distLabel(x)+'<span class="gn-hint">im Schnitt ab '+
         esc((hotelOf(d)||{}).n||'Unterkunft')+'</span>':'';})():'')+
      (S.mode==='plan'
        ? '<span class="gn-off">Weitere ausgeblendet — <button class="linkish" data-act="mode" data-m="all">alle zeigen</button></span>'
@@ -1552,7 +1616,7 @@ function renderCity(cid){
       h+='<div class="grouphead"><span class="gh-k">'+jnum(o.idx)+'</span>'+
          '<span class="gh-t">'+esc(o.head.t)+'</span>'+
          '<span class="gh-n num">'+o.n+'/'+o.tot+'</span>'+
-         (function(){var x=fromHotel(d,o.head.id);return x?'<span class="gh-d">'+distLabel(x)+'</span>':'';})()+
+         (function(){var x=fromHotelArea(d,o.head);return x?'<span class="gh-d">'+distLabel(x)+'</span>':'';})()+
          (o.head.hint?'<span class="gh-h">'+esc(o.head.hint)+'</span>':'')+'</div>';
       return;}
     var p=o.p,on=!!o.it,isM=(p.res==='req'||p.cat==='tour');
@@ -1569,7 +1633,7 @@ function renderCity(cid){
       (p.cash?'<span>nur bar</span>':'')+
 '</div>'+
       '<div class="pc-why">'+esc(p.why||'')+'</div>'+
-      (function(){var x=fromHotel(d,o.a.id);
+      (function(){var x=fromHotel(d,o.a.id,p.id);
         return x?distLabel(x,true):'';})()+'</div></div>';
   });
   h+='</div></div>';
